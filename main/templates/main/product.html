@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOGO</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="http://fonts.cdnfonts.com/css/pt-root-ui">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <div class="block block-dark">
+    <nav>
+        <ul class='nav'>
+            <li class="nav-item"><a class="nav-link" href="">Контакты</a></li>
+            <li class="nav-item"><a class="nav-link" href="">О нас</a></li>
+            <li class="nav-item"><a class="nav-link" href="">Доставка</a></li>
+        </ul>
+      </nav>
+   
+<nav>
+    <ul class='nav'>
+        <li class="nav-item"><img class="nav-img" src="img/instagram.svg" alt="indstagram" width="15" height="15"><a class="nav-link" href="">logo</a></li>
+        <li class="nav-item"><img class="nav-img" src="img/icons8-whatsapp.svg" alt="indstagram" width="15" height="15"><a class="nav-link" href="">Написать нам</a></li>
+      </ul>
+    </nav>
+</div>
+<div class="poisk">
+    <p class="poisk-deskription">logo</p>
+      <form>
+        <button class="poisk-button" type="submit"><img class="poisk-img" src="img/Component.svg" alt="menu" width="15" height="16" ><a class="poisk-link" href="opencatalog.html">КАТАЛОГ</a></button><!--
+        --><input class="poisk-input" type="text">
+      </form>
+      <ul class='van'>
+        <li class="van-item"><img class="van-img" src="img/Vector(1).svg" alt="heart" width="20" height="20" ><a class="van-link" href="">Избранное</a></li>
+        <li class="van-item"><img class="van-img" src="img/user 3.svg" alt="people" width="20" height="20" ><a class="van-link" href="">Вход/Регистрация</a></li>
+        <li class="van-item"><img class="van-img" src="img/basket 3.svg" alt="basket" width="20" height="20" ><a class="van-link" href="">5000 ₽/5 штук</a></li>
+      </ul>
+     
+</div>
+</header>
+       <guide>
+        <ul class='guide'>
+            <li class="guide-item"><a class="guide-link" href="index.html">Главная</a></li>
+            <li class="guide-item">/</li>
+            <li class="guide-item"><a class="guide-link" href="">Каталог</a></li>
+            <li class="guide-item">/</li>
+            <li class="guide-item"><a class="guide-link" href="">Жакеты и пиджаки</a></li>
+            <li class="guide-item">/</li>
+            <li class="guide-item">Жакет Weekend Max Mara ONDINA</li>
+        </ul>
+       </guide>
+       <div class="carta">
+       <div class="carta-item scrool">
+        <ul>
+            <li class="scrool-item"><img class="scrool-icon" src="img/top.svg" alt="top"></li>
+            <li class="scrool-item"><img class="scrool-img" src="img/back.png" width="180" height="242" alt="one"></li>
+            <li class="scrool-item"><img class="scrool-img" src="img/back.png" width="180" height="242" alt="two"></li>
+            <li class="scrool-item"><img class="scrool-icon" src="img/bottom.svg" alt="bottom"></li>
+        </ul>
+       </div>
+       <div class="carta-item migm">
+       <img src="img/back.png" alt="main" width="464" height="612"><span class="migm-span">NEW</span>
+       </div>
+       <div class="carta-item info">
+        <h2 class="info-title">{{product.name}}</h2>
+        <p class="info-description"><b>Артикул:</b> {{product.code}} </p>
+        <p class="info-description">{{product.description}}</p>
+
+        <p class="info-subtitle">РАЗМЕР:</p>
+
+        
+        <select class="info-select" name="user_size">
+          <option value="1">40/42</option>
+          <option value="2">44/46</option>
+          <option value="3">48/50</option>
+        </select>
+        <p class="info-descriptions">Не можете подобрать размер?<br> <a class="info-link" href="">Запишитесь на примерку в наш шоурум</a></p>
+         
+
+        <p class="info-subtitle">ЦВЕТ:</p>
+        <div class="radioone">
+        <input class="radioone-input" type="radio" name="color" ib="ri1"><span class="radioone-fake"></span><label class="radioone-label" for="ri1"></label>
+        </div>
+        <div class="radiotwo">
+        <input class="radiotwo-input" type="radio" name="color" ib="ri2"><label class="radiotwo-label" for="ri2"></label>
+        </div>
+        <div class="radiothree">
+        <input class="radiothree-input" type="radio" name="color" ib="ri3"><label class="radiothree-label" for="ri3"></label>
+        </div>
+        <div class="radiofour">
+        <input class="radiofour-input" type="radio" name="color" ib="ri4"><label class="radiofour-label" for="ri4"></label>
+        </div>
+
+       <div class="blockprice">
+        <p class="info-price">{{product.price}}</p>
+
+      <div class="counter">
+        <button class="counter-minus" type="button" onclick="this.nextElementSibling.stepDown()">-</button>
+        <input  type="number" min="0" max="100" value="1" readonly class="counter-raz">
+        <button class="counter-plus" type="button" onclick="this.previousElementSibling.stepUp()">+</button>
+      </div>
+
+        <button class="info-button" type="submit"><a class="info-inlink" href="">В КОРЗИНУ</a></button>
+       </div>
+
+       </div>
+       </div>
+       <footer>
+        <div class="tblock tblock-dark">
+          <end>
+            <ul class='end'>
+              <li class="end-name">logo</li>
+              <li class="end-item"><button class="end-button" type="submit"><a class="end-link" href="">СВЯЗАТЬСЯ С НАМИ</a></button></li>
+              <li class="end-item"><a class="end-link" href="">Политика конфиденциальности</a></li>
+              <li class="end-item"><a class="end-link" href="">Пользовательское соглащение</a></li>
+          </ul>
+          </end>
+          <ends>
+            <ul class='ends'>
+              <li class="ends-item">КАТАЛОГ</li><br>
+              <li class="ends-item"><a class="ends-link" href="">Одежда</a></li>
+              <li class="ends-item"><a class="ends-link" href="">Обувь</a></li>
+              <li class="ends-item"><a class="ends-link" href="">Верхняя одежда</a></li>
+              <li class="ends-item"><a class="ends-link" href="">Домашняя одежда</a></li><br><br>
+              <li class="ends-item"><a class="ends-link" href="">Купальники</a></li>
+              <li class="ends-item"><a class="ends-link" href="">Аксессуары</a></li>
+              <li class="ends-item"><a class="ends-link" href="">Идеи для подарков</a></li>
+              <li class="ends-item"><a class="ends-link" href="">Marina Rinaldi</a></li>
+          </ul>
+          </ends>
+          <end>
+            <ul class='end'>
+              <li class="end-item">О КОМПАНИИ</li><br>
+              <li class="end-item"><a class="end-link" href="">О нас</a></li>
+              <li class="end-item"><a class="end-link" href="">Контакты</a></li>
+              <li class="end-item"><a class="end-link" href="">Доставка</a></li>
+              <li class="end-item"><a class="end-link" href="">Оплата</a></li>
+          </ul>
+          </end>
+          <end>
+            <ul class='end'>
+              <li class="end-item">КОНТАКТЫ</li><br>
+              <li class="end-item"><a class="end-tel" href="">+7 (900) 900-90-90</a></li>
+              <li class="end-item"><a class="end-link" href="">sail@mail.com</a></li>
+              <li class="end-item"><img class="end-img" src="img/Vector1.svg" alt="telega"><img class="end-img" src="img/insta.svg" alt="instagram">    
+              <img class="end-img" src="img/Vk.svg" alt="vk"><img class="end-img" src="img/Vector.svg" alt="youtube"></li><br><br><br>
+          </ul>
+          </end>
+        </div>
+        <div class="miniblock">
+          <p>© logo, 2022</p>
+          <p>Developed by F E I P</p>
+        </div>
+      </footer>
+    </body>
+    </html>

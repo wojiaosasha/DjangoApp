@@ -1,17 +1,20 @@
 from django.db import models
 from django.contrib.postgres.fields import ArrayField
+# from django.forms import ModelForm
+# from django.contrib.postgres.forms import SplitArrayField
+from django import forms
 
 class Category(models.Model):
     slug = models.SlugField()
     public_name = models.CharField(max_length=50)
     parent_id = models.ForeignKey('self', on_delete=models.CASCADE, null=True, default=None) #cначала одна запись, потом доб. эту колонку
-    image = models.ImageField(upload_to='images')
+    image = models.ImageField(upload_to='images', null=True)
     show = models.BooleanField(default=True)
 
 class Product(models.Model):
     category_id = models.ForeignKey(Category, on_delete=models.PROTECT)
-    images = ArrayField(models.ImageField(upload_to='images'), size=7)
-    code = models.IntegerField()
+    images = ArrayField(models.ImageField(upload_to='images'), size=7, null=True)
+    code = models.IntegerField(unique=True)
     name = models.CharField(max_length=100)
     price = models.IntegerField()
     discount_price = models.IntegerField(null=True)
