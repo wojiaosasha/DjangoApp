@@ -1,0 +1,175 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOGO</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="http://fonts.cdnfonts.com/css/pt-root-ui">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <div class="block block-dark">
+        <nav>
+            <ul class='nav'>
+              {% for i in infopages %}
+                <li class="nav-item"><a class="nav-link" href="{% url 'infopage' i.slug %}">{{i.title}}</a></li>
+              {% endfor %}
+            </ul>
+          </nav>
+       
+    <nav>
+        <ul class='nav'>
+            <li class="nav-item"><img class="nav-img" src="{% static instagram.icon %}" alt="{{instagram.name}}" width="15" height="15">
+              <a class="nav-link" href="{{instagram.link}}">logo</a>
+            </li>
+            <li class="nav-item"><img class="nav-img" src="{% static whatsapp.icon %}" alt="{{whatsapp.name}}" width="15" height="15">
+              <a class="nav-link" href="{{whatsapp.link}}">Написать нам</a>
+            </li>
+          </ul>
+        </nav>
+    </div>
+    <div class="poisk">
+        <p class="poisk-deskription">logo</p>
+          <form action="{% url 'search' %}" method="get">
+            <div class="dropdown">
+            <button class="poisk-button" id="callback-button"><img class="poisk-img" src="{% static 'img/Component.svg' %}" alt="menu" width="15" height="16" ><a class="poisk-link" href="">КАТАЛОГ</a></button>
+            <input name="q" class="poisk-input" type="text">
+            <div class="dropdown-content" >
+              <div class="directory">
+              <div class="directory-item close">
+               <ul class="close">
+                 <li class="close-item close-title"><a class="close-link" href="">ОДЕЖДА</a></li>
+                 <li class="close-item"><a class="close-link" href="">Юбки</a></li>
+                 <li class="close-item"><a class="close-link" href="">Джемеперы</a></li>
+                 <li class="close-item"><a class="close-link" href="">Джинсы</a></li>
+                 <li class="close-item"><a class="close-link" href="">Брюки, шорты</a></li>
+                 <li class="close-item"><a class="close-link" href="">Футболки, топы, лонгсливы</a></li>
+                 <li class="close-item"><a class="close-link" href="">Блузки, рубашки, туники</a></li>
+                 <li class="close-item"><a class="close-link" href="">Платья</a></li>
+                 <li class="close-item"><a class="close-link" href="">Толстовки</a></li>
+                 <li class="close-item"><a class="close-link" href="">Костюмы</a></li>
+                 <li class="close-item">
+                    <div class="dropdown">
+                        <a class="close-link" href="">Оверол</a>
+                    </div>
+                    <ul class="close">
+                        <li class="close-item"><a class="close-link" href="">Оверол</a></li>
+                        <li class="close-item"><a class="close-link" href="">Оверол</a></li>
+                        <li class="close-item"><a class="close-link" href="">Оверол</a></li>
+                    </ul>
+                 </li>
+              </ul>
+              </div>
+       
+              <div class="directory-item outwear">
+               <ul class="outwear">
+                 <li class="outwear-item outwear-title"><a class="outwear-link" href="">ВЕРХНЯЯ ОДЕЖДА</a></li>
+                 <li class="outwear-item"><a class="outwear-link" href="">Куртки</a></li>
+                 <li class="outwear-item"><a class="outwear-link" href="">Джинсовые куртки</a></li>
+                 <li class="outwear-item"><a class="outwear-link" href="">Пальто</a></li>
+                 <li class="outwear-item"><a class="outwear-link" href="">Пуховики</a></li>
+                 <li class="outwear-item"><a class="outwear-link" href="">Плащи</a></li>
+                 <li class="outwear-item"><a class="outwear-link" href="">Ветровки</a></li>
+                 <li class="outwear-item"><a class="outwear-link" href="">Кэмэлюкс</a></li>
+              </ul>
+              </div>
+       
+              <div class="directory-item accessory">
+               <ul class="accessory">
+                 <li class="accessory-item accessory-title"><a class="accessory-link" href="">АКСЕССУАРЫ</a></li>
+                 <li class="accessory-item"><a class="accessory-link" href="">Солнечные очки</a></li>
+                 <li class="accessory-item"><a class="accessory-link" href="">Ремни</a></li>
+                 <li class="accessory-item"><a class="accessory-link" href="">Перчатки</a></li>
+                 <li class="accessory-item"><a class="accessory-link" href="">Бижутерия</a></li>
+                 <li class="accessory-item"><a class="accessory-link" href="">Аксессуары Дял Кубов</a></li>
+              </ul>
+              </div>
+       
+              <div class="directory-item other">
+               <ul class="other">
+                 <li class="other-item other-title"><a class="other-link" href="">ЖАКЕТЫ И ПИДЖАКИ</a></li>
+                 <li class="other-item other-title"><a class="other-link" href="">ОБУВЬ</a></li>
+                 <li class="other-item other-title"><a class="other-link" href="">СУМКИ И КОШЕЛЬКИ</a></li>
+                 <li class="other-item other-title"><a class="other-link" href="">ШАПКИ, ШЛЯПЫ, ШАРФЫ</a></li>
+              </ul>
+              </div>
+              </div></div></div>
+          </form>
+    
+          <ul class='van'>
+            <li class="van-item"><img class="van-img" src="{% static 'img/Vector(1).svg' %}" alt="heart" width="20" height="20" ><a class="van-link" href="">Избранное</a></li>
+            <li class="van-item">
+              <img class="van-img" src="{% static 'img/user 3.svg' %}" alt="people" width="20" height="20" ><a class="van-link" href="#openModal">Вход/Регистрация</a>
+            </li>
+            {% if user.is_authenticated %}
+              <li class="van-item"><img class="van-img" src="{% static 'img/basket 3.svg' %}" alt="basket" width="20" height="20" >
+                <a class="van-link" href="">{{user.cart_full_price}} ₽ / {{user.cart_amount}} шт.</a>
+              </li>
+            {% else %}
+            <li class="van-item"><img class="van-img" src="{% static 'img/basket 3.svg' %}" alt="basket" width="20" height="20" >
+              Вы не юзер :(
+            </li>
+            {% endif %}
+            
+          </ul>
+         
+    </div>
+    </header>
+    {% block content %}{% endblock %}
+    <footer>
+        <div class="tblock tblock-dark">
+          <end>
+            <ul class='end'>
+              <li class="end-name">logo</li>
+              <li class="end-item"><button class="end-button" type=""><a class="end-link" href="{{whatsapp.link}}">СВЯЗАТЬСЯ С НАМИ</a></button></li>
+              <li class="end-item"><a class="end-link" href="{{settings.privacy_policy.url}}">Политика конфиденциальности</a></li>
+              <li class="end-item"><a class="end-link" href="{{settings.terms_of_use.url}}">Пользовательское соглащение</a></li>
+          </ul>
+          </end>
+          <ends>
+            <ul class='ends'>
+              <li class="ends-item">КАТАЛОГ</li><br>
+              <li class="ends-item"><a class="ends-link" href="">Одежда</a></li>
+              <li class="ends-item"><a class="ends-link" href="">Обувь</a></li>
+              <li class="ends-item"><a class="ends-link" href="">Верхняя одежда</a></li>
+              <li class="ends-item"><a class="ends-link" href="">Домашняя одежда</a></li><br><br>
+              <li class="ends-item"><a class="ends-link" href="">Купальники</a></li>
+              <li class="ends-item"><a class="ends-link" href="">Аксессуары</a></li>
+              <li class="ends-item"><a class="ends-link" href="">Идеи для подарков</a></li>
+              <li class="ends-item"><a class="ends-link" href="">Marina Rinaldi</a></li>
+          </ul>
+          </ends>
+          <end>
+            <ul class='end'>
+              <li class="end-item">О КОМПАНИИ</li><br>
+              {% for i in infopages %}
+                <li class="end-item"><a class="end-link" href="{% url 'infopage' i.slug %}">{{i.title}}</a></li>
+              {% endfor %}
+          </ul>
+          </end>
+          <end>
+            <ul class='end'>
+              <li class="end-item">КОНТАКТЫ</li><br>
+              <li class="end-item">{{settings.phone}}</li>
+              <li class="end-item">{{settings.email}}</li>
+              <li class="end-item">
+                {% for i in contacts %}
+                  <a href="{{i.link}}"><img class="end-img" src="{% static i.icon %}" alt="{{i.name}}"></a>
+                {% endfor %}
+                <!-- <img class="end-img" src="{% static 'img/Vector1.svg' %}" alt="telega"><img class="end-img" src="{% static 'img/insta.svg' %}" alt="instagram">    
+              <img class="end-img" src="{% static 'img/Vk.svg' %}" alt="vk"><img class="end-img" src="{% static 'img/Vector.svg' %}" alt="youtube"> -->
+              </li><br><br><br>
+          </ul>
+          </end>
+        </div>
+        <div class="miniblock">
+          <p>© logo, 2022</p>
+          <p>Developed by F E I P</p>
+        </div>
+      </footer>
+    </body>
+</html>

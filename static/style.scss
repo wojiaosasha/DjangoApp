@@ -448,8 +448,8 @@ color:white;
         text-align: center;
         padding: 3px 17px;
         position: absolute;
-        top: 36%;
-        left: 18.9%;
+        top: 40%;
+        left: 21.2%;
         transform: translate(-50%, -50%); 
     }
 }
@@ -704,57 +704,43 @@ color:white;
 }
 .close, .outwear, .accessory, .other{
     list-style:none;
-    padding-top: 56px;
-    padding-left: 96px;
+    padding-top: 10px;
     &-item{
         padding-bottom: 16px;
+        padding-left: 20px;
     }
     &-link{
-        font-size: 18px;
+        font-size: 16px;
         color: $gray;
     }
     &-title{
         font-weight: 700;
         padding-bottom: 24px;
     }
-    padding-bottom: 96px;
+    margin-right: 60px;
 }
-.nofoot{
-    background: $darkgray;
-    list-style: none;
-    display:flex;
-    justify-content: center;
-    margin: 0;
-    position: relative;
-    padding-bottom: 32px;
-    &-item{
-        margin-left: 32px;
-    }
-    &-olink{
-        color:white;
-        font-size: 18px;
-        position: absolute;
-        top: 40%;
-        left: 15%;
-        transform: translate(-50%, -50%);
-    }
-    &-tlink{
-        color:white;
-        font-size: 18px;
-        position: absolute;
-        top: 40%;
-        left: 45%;
-        transform: translate(-50%, -50%);
-    }
-    &-flink{
-        color:white;
-        font-size: 18px;
-        position: absolute;
-        top: 40%;
-        left: 75%;
-        transform: translate(-50%, -50%);
-    }
-}
+
 .l_block{
     color:#a3a5ac;
 }
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+.dropdown-content{
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+.dropdown-content a {
+    padding: 2px 4px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+.dropdown:hover .dropdown-content {display: block;}

@@ -1,0 +1,16 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+{% load static %}
+
+<guide>
+    <ul class='guide'>
+        <li class="guide-item"><a class="guide-link" href="index.html">Главная</a></li>
+        <li class="guide-item">/</li>
+        <li class="guide-item">Результаты поиска</li>
+    </ul>
+   </guide>
+   <br><h2 class="title">ПО ЗАПРОСУ "{{q}}" НИЧЕГО НЕ НАЙДЕНО</h1>
+    <img class="god" src="{% static 'img/issus.png' %}" alt="error">
+
+{% endblock %}

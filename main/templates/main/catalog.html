@@ -1,15 +1,174 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1> Каталог </h1>
-    {% for i in products %} 
-        <h1> {{ i.name }} </h1>
-    {% endfor %}
-</body>
-</html>
+{% extends 'main/base.html' %}
+
+{% block content %}
+{% load static %}
+
+<guide>
+    <ul class='guide'>
+        <li class="guide-item"><a class="guide-link" href="index.html">Главная</a></li>
+        <li class="guide-item">/</li>
+        <li class="guide-item">Каталог</li>
+    </ul>
+   </guide>
+   <br>
+   <sorting>
+   <ul class="sorting">
+   <li class="sorting-item"><h2 class="title">КАТАЛОГ</h1></li>
+   <li class="sorting-item"><select class="sorting-select" name="sort">
+    <option>Сортировать</option>
+    <option value="1">Цена</option>
+    <option value="2">По названию</option>
+  </select></li>
+   </ul>
+  </sorting>
+    <div class="t_space"></div>
+  <script src="script.js"></script>
+    <t_novel>
+      <ul class='t_novel'>
+        <li class="t_novel-item"><img src="img/back.png" alt="trench" width="288" height="407" id="ShowHide1"><span class="t_novel-ometa">NEW</span><br><a class="t_novel-link" href="">Water-repellent wool twill trench coat</a>
+        <p class="t_novel-price">17 200 ₽</p><div id="exemple1" class="t_novel-block"><p class="intl">Выберите размер:</p>
+          <spisok>
+          <ul class="spisok">
+            <li class="spisok-item"><button class="spisok-button" type="submit">XS</button></li>
+            <li class="spisok-item"><button class="spisok-button" type="submit">S</button></li>
+            <li class="spisok-item"><button class="spisok-button" type="submit">M</button></li>
+            <li class="spisok-item"><button class="spisok-button" type="submit">L</button></li>
+            <li class="spisok-item"><button class="spisok-button" type="submit">XL</button></li>
+            </ul></spisok>
+            <button class="backet" type="submit"><a class="backet-link" href="">В КОРЗИНУ</a></button>
+        </div></li>
+        <li class="t_novel-item"><img src="img/back.png" alt="trench" width="288" height="407" id="ShowHide2"><br><a class="t_novel-link" href="">Water-repellent wool twill trench coat</a>
+        <p class="t_novel-price">17 200 ₽</p><div id="exemple2" class="t_novel-block">
+          <p class="intl">Выберите размер:</p>
+          <spisok>
+          <ul class="spisok">
+            <li class="spisok-item"><button class="spisok-button" type="submit">XS</button></li>
+            <li class="spisok-item"><button class="spisok-button" type="submit">S</button></li>
+            <li class="spisok-item"><button class="spisok-button" type="submit">M</button></li>
+            <li class="spisok-item"><button class="spisok-button" type="submit">L</button></li>
+            <li class="spisok-item"><button class="spisok-button" type="submit">XL</button></li>
+            </ul></spisok>
+            <button class="backet" type="submit"><a class="backet-link" href="">В КОРЗИНУ</a></button>
+        </div></li>
+        <li class="t_novel-item"><img src="img/back.png" alt="trench" width="288" height="407"  id="ShowHide3"><span class="t_novel-fmeta">Лучшая цена</span><br><a class="t_novel-link" href="">Water-repellent wool twill trench coat</a><p class="t_novel-price">17 200 ₽</p>
+          <div id="exemple3" class="t_novel-block">
+            <p class="intl">Выберите размер:</p>
+            <spisok>
+            <ul class="spisok">
+              <li class="spisok-item"><button class="spisok-button" type="submit">XS</button></li>
+              <li class="spisok-item"><button class="spisok-button" type="submit">S</button></li>
+              <li class="spisok-item"><button class="spisok-button" type="submit">M</button></li>
+              <li class="spisok-item"><button class="spisok-button" type="submit">L</button></li>
+              <li class="spisok-item"><button class="spisok-button" type="submit">XL</button></li>
+              </ul></spisok>
+              <button class="backet" type="submit"><a class="backet-link" href="">В КОРЗИНУ</a></button>
+          </div>
+        </li>
+      </ul>
+    </t_novel>
+    <t_novel>
+      <ul class='t_novel'>
+        <li class="t_novel-item"><img src="img/back.png" alt="trench" width="288" height="407" id="ShowHide4"><span class="t_novel-ometa">NEW</span><br><a class="t_novel-link" href="">Water-repellent wool twill trench coat</a>
+        <p class="t_novel-price">17 200 ₽</p>
+        <div id="exemple4" class="t_novel-block">
+          <p class="intl">Выберите размер:</p>
+          <spisok>
+          <ul class="spisok">
+            <li class="spisok-item"><button class="spisok-button" type="submit">XS</button></li>
+            <li class="spisok-item"><button class="spisok-button" type="submit">S</button></li>
+            <li class="spisok-item"><button class="spisok-button" type="submit">M</button></li>
+            <li class="spisok-item"><button class="spisok-button" type="submit">L</button></li>
+            <li class="spisok-item"><button class="spisok-button" type="submit">XL</button></li>
+            </ul></spisok>
+            <button class="backet" type="submit"><a class="backet-link" href="">В КОРЗИНУ</a></button>
+        </div></li>
+        <li class="t_novel-item"><img src="img/back.png" alt="trench" width="288" height="407" id="ShowHide5"><br><a class="t_novel-link" href="">Water-repellent wool twill trench coat</a>
+        <p class="t_novel-price">17 200 ₽</p>
+        <div id="exemple5" class="t_novel-block">
+          <p class="intl">Выберите размер:</p>
+          <spisok>
+          <ul class="spisok">
+            <li class="spisok-item"><button class="spisok-button" type="submit">XS</button></li>
+            <li class="spisok-item"><button class="spisok-button" type="submit">S</button></li>
+            <li class="spisok-item"><button class="spisok-button" type="submit">M</button></li>
+            <li class="spisok-item"><button class="spisok-button" type="submit">L</button></li>
+            <li class="spisok-item"><button class="spisok-button" type="submit">XL</button></li>
+            </ul></spisok>
+            <button class="backet" type="submit"><a class="backet-link" href="">В КОРЗИНУ</a></button>
+        </div></li>
+        <li class="t_novel-item"><img src="img/back.png" alt="trench" width="288" height="407" id="ShowHide6"><span class="t_novel-fmeta">Лучшая цена</span><br><a class="t_novel-link" href="">Water-repellent wool twill trench coat</a>
+        <p class="t_novel-price">17 200 ₽</p>
+        <div id="exemple6" class="t_novel-block">
+          <p class="intl">Выберите размер:</p>
+          <spisok>
+          <ul class="spisok">
+            <li class="spisok-item"><button class="spisok-button" type="submit">XS</button></li>
+            <li class="spisok-item"><button class="spisok-button" type="submit">S</button></li>
+            <li class="spisok-item"><button class="spisok-button" type="submit">M</button></li>
+            <li class="spisok-item"><button class="spisok-button" type="submit">L</button></li>
+            <li class="spisok-item"><button class="spisok-button" type="submit">XL</button></li>
+            </ul></spisok>
+            <button class="backet" type="submit"><a class="backet-link" href="">В КОРЗИНУ</a></button>
+        </div></li>
+      </ul>
+    </t_novel>
+    <t_novel>
+      <ul class='t_novel'>
+        <li class="t_novel-item"><img src="img/back.png" alt="trench" width="288" height="407" id="ShowHide7"><span class="t_novel-ometa">NEW</span><br><a class="t_novel-link" href="">Water-repellent wool twill trench coat</a>
+        <p class="t_novel-price">17 200 ₽</p>
+        <div id="exemple7" class="t_novel-block">
+          <p class="intl">Выберите размер:</p>
+          <spisok>
+          <ul class="spisok">
+            <li class="spisok-item"><button class="spisok-button" type="submit">XS</button></li>
+            <li class="spisok-item"><button class="spisok-button" type="submit">S</button></li>
+            <li class="spisok-item"><button class="spisok-button" type="submit">M</button></li>
+            <li class="spisok-item"><button class="spisok-button" type="submit">L</button></li>
+            <li class="spisok-item"><button class="spisok-button" type="submit">XL</button></li>
+            </ul></spisok>
+            <button class="backet" type="submit"><a class="backet-link" href="">В КОРЗИНУ</a></button>
+        </div></li>
+        <li class="t_novel-item"><img src="img/back.png" alt="trench" width="288" height="407" id="ShowHide8"><br><a class="t_novel-link" href="">Water-repellent wool twill trench coat</a>
+        <p class="t_novel-price">17 200 ₽</p>
+        <div id="exemple8" class="t_novel-block">
+          <p class="intl">Выберите размер:</p>
+          <spisok>
+          <ul class="spisok">
+            <li class="spisok-item"><button class="spisok-button" type="submit">XS</button></li>
+            <li class="spisok-item"><button class="spisok-button" type="submit">S</button></li>
+            <li class="spisok-item"><button class="spisok-button" type="submit">M</button></li>
+            <li class="spisok-item"><button class="spisok-button" type="submit">L</button></li>
+            <li class="spisok-item"><button class="spisok-button" type="submit">XL</button></li>
+            </ul></spisok>
+            <button class="backet" type="submit"><a class="backet-link" href="">В КОРЗИНУ</a></button>
+        </div></li>
+        <li class="t_novel-item"><img src="img/back.png" alt="trench" width="288" height="407" id="ShowHide9"><span class="t_novel-fmeta">Рекомендуем</span><br><a class="t_novel-link" href="">Water-repellent wool twill trench coat</a>
+        <p class="t_novel-price">17 200 ₽</p>
+        <div id="exemple9" class="t_novel-block">
+          <p class="intl">Выберите размер:</p>
+          <spisok>
+          <ul class="spisok">
+            <li class="spisok-item"><button class="spisok-button" type="submit">XS</button></li>
+            <li class="spisok-item"><button class="spisok-button" type="submit">S</button></li>
+            <li class="spisok-item"><button class="spisok-button" type="submit">M</button></li>
+            <li class="spisok-item"><button class="spisok-button" type="submit">L</button></li>
+            <li class="spisok-item"><button class="spisok-button" type="submit">XL</button></li>
+            </ul></spisok>
+            <button class="backet" type="submit"><a class="backet-link" href="">В КОРЗИНУ</a></button>
+        </div></li>
+      </ul>
+    </t_novel>
+    <page>
+      <ul class="page">
+        <li class="page-item"><button class="page-button" type="submit"><a class="page-link" href="">1</a></button></li>
+        <li class="page-item"><button class="page-button" type="submit"><a class="page-link" href="">2</a></button></li>
+        <li class="page-item"><button class="page-button" type="submit"><a class="page-link" href="">3</a></button></li>
+        <li class="page-item"><button class="page-button" type="submit"><a class="page-link" href="">4</a></button></li>
+        <li class="page-item"><button class="page-button" type="submit"><a class="page-link" href="">5</a></button></li>
+        <li class="page-item"><button class="page-button" type="submit"><a class="page-link" href="">6</a></button></li>
+        <li class="page-item"><button class="page-button" type="submit"><a class="page-link" href="">7</a></button></li>
+        <li class="page-item page-next"><a class="page-olink" href="">Далее</a></li>
+      </ul>
+    </page>
+
+{% endblock %}

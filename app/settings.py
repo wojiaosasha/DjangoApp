@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-wi7646^flz_oh=rwkgwnix5jegwqn6$t81zp-bo1%#2)aaws0+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['.localhost', '127.0.0.1', '[::1]', '10.193.191.52', '10.0.254.93']
 
 
 # Application definition
@@ -105,6 +105,13 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'main.backends.AuthBackend',
+]
+
+#AUTH_USER_MODEL = 'main.CustomUser'
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
@@ -123,7 +130,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')] #спорно
+
 STATIC_URL = '/static/'
+STATIC_ROOT = '/static/' #спорно
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -131,4 +141,4 @@ STATIC_URL = '/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = f'{BASE_DIR}/media' #'/home/wojiaosasha/django-app/media' #BASE_DIR / 'media'

@@ -1,12 +1,73 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Очень главная страница</h1>
-</body>
-</html>
+{% extends 'main/base.html' %}
+
+{% block content %}
+{% load static %}
+
+<main>
+    <div class="main">
+    <p class="main-image"><img src="{{settings.title_image.url}}" height="346" width="1248" alt="prewiev"></p>
+    <div class="main-centered">logo</div>
+    <div class="main-centeredm">Одежда Max Mara из Италии <br> с персональной скидкой</div>
+    </div>
+  </main> 
+  <pik>
+    <ul class='pik'>
+      {% for i in title_categories|slice:':3' %}
+        <li class="pik-item"><img src="{{i.image.url}}" alt="{{i.name}}" width="394" height="212" >
+          <a class="pik-{% if forloop.first %}o{% elif forloop.last %}t{% else %}f{% endif %}link" href="{% url 'category' i.slug %}">{{i.name}}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </pik>
+  <tpik>
+    <ul class='tpik'>
+      {% for i in title_categories|slice:'3:5' %}
+        <li class="tpik-item"><img src="{{i.image.url}}" alt="{{i.name}}" width="608" height="288" >
+          <a class="tpik-{% if forloop.first %}o{% else %}t{% endif %}link" href="{% url 'category' i.slug %}">{{i.name}}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </tpik>
+  <fpik>
+    <ul class='fpik'>
+      {% for i in title_categories|slice:'5:8' %}
+        <li class="fpik-item"><img src="{{i.image.url}}" alt="{{i.name}}" width="394" height="212" >
+          <a class="fpik-{% if forloop.first %}o{% elif forloop.last %}t{% else %}f{% endif %}link" href="{% url 'category' i.slug %}">{{i.name}}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </fpik>
+ <div class="new">
+  <p>НОВЫЕ ПОСТУПЛЕНИЯ</p>
+ </div>
+    <novel>
+  <ul class='novel'>
+    <li class="novel-item"><img src="img/back.png" alt="trench" width="288" height="407" ><span class="novel-ometa">NEW</span><br><a class="novel-link" href="">Water-repellent wool twill trench coat</a>
+    <img class="novel-back" src="img/Group 617.svg" alt="back"><p class="novel-price">17 200 ₽</p></li>
+    <li class="novel-item"><img src="img/back.png" alt="trench" width="288" height="407" ><span class="novel-tmeta">NEW</span><br><a class="novel-link" href="">Water-repellent wool twill trench coat</a><p class="novel-price">17 200 ₽</p></li>
+    <li class="novel-item"><img src="img/back.png" alt="trench" width="288" height="407" ><span class="novel-fmeta">NEW</span><br><a class="novel-link" href="">Water-repellent wool twill trench coat</a><p class="novel-price">17 200 ₽</p></li>
+    <li class="novel-item"><img src="img/back.png" alt="trench" width="288" height="407" ><span class="novel-smeta">NEW</span><br><a class="novel-link" href="">Water-repellent wool twill trench coat</a>
+    <img class="novel-next" src="img/Group 618.svg" alt="next"> <p class="novel-price">17 200 ₽</p></li>
+  </ul>
+</novel>
+<about>
+  <div class="about">
+    <p class="about-one">О КОМПАНИИ</p>
+    <p class="about-two">Меня зовут Имя Фамилия. Я заказываю одежду Бренд из Страна <br>с персональной скидкой и подбираю для Вас интересные варианты<br> сумок, одежды и обуви в шоуруме.</p>
+    <button class="about-button" type="submit"><a class="about-link" href="">ПОДРОБНЕЕ</a></button>
+    </div>
+  </about>
+    <div class="new">
+      <p>МЫ В ИНСТАГРАМ</p>
+     </div>
+     <ins>
+     <ul class='ins'>
+      <li class="ins-item"><img src="img/back.png" alt="choose" width="224" height="224" ></li>
+      <li class="ins-item"><img src="img/back.png" alt="choose" width="224" height="224" ></li>
+      <li class="ins-item"><img src="img/back.png" alt="choose" width="224" height="224" ></li>
+      <li class="ins-item"><img src="img/back.png" alt="choose" width="224" height="224" ></li>
+      <li class="ins-item"><img src="img/back.png" alt="choose" width="224" height="224" ></li>
+    </ul>
+  </ins>
+
+{% endblock %}

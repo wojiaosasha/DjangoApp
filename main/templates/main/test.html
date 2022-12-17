@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <a href="{% url 'catalog' %}">ссылка</a> -->
+    {{s}}
+    <form action="/getcode" method="POST">
+        {% csrf_token %}
+        <div>
+            <label for="say">Phone</label>
+            <input name="phone" id="say"/>
+        </div>
+        <div>
+            <button>Get code</button>
+        </div>
+    </form>
+    <form action="/login" method="POST">
+        {% csrf_token %}
+        <div>
+            <label for="say">Phone</label>
+            <input name="phone" id="phone"/>
+        </div>
+        <div>
+            <label for="say">Code</label>
+            <input name="code" id="code"/>
+        </div>
+        <div>
+            <button>Login</button>
+        </div>
+    </form>
+    <form action="/logout" method="POST">
+        {% csrf_token %}
+        <div>
+            <button>Logout</button>
+        </div>
+    </form>
+    <!-- {{i}} -->
+    <!-- {{i.images}} -->
+
+    <!-- {% for j in i.images %} -->
+    <!-- {{j.url}} -->
+    <!-- <img src="{{ j.url }}"/> -->
+    <!-- {% endfor %} -->
+    <!-- <img src="{{ i.images }}"/> -->
+
+    <!-- {% for j in cats %}
+    <img src="{{ j.image.url }}"/>
+    {% endfor %} -->
+    <a href="{{ pp.url }}">Privacy policy</a>
+</body>
+</html>
