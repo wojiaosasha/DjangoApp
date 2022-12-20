@@ -4,102 +4,109 @@
 {% load static %}
 
 <guide>
-    <ul class='guide'>
-        <li class="guide-item"><a class="guide-link" href="delete.html">&lt; Вернуться в корзину</a></li>
-        <li class="guide-item">|</li>
-        <li class="guide-item guide-title">ОФОРМЛЕНИЕ ЗАКАЗА</li>
-    </ul>
-   </guide>
+  <ul class='guide'>
+      <li class="guide-item"><a class="guide-link" href="{% url 'cart' %}">&lt; Вернуться в корзину</a></li>
+      <li class="guide-item">|</li>
+      <li class="guide-item guide-title">ОФОРМЛЕНИЕ ЗАКАЗА</li>
+  </ul>
+ </guide>
 
-   <div class="fon_color">
-    <div class="forma fon_color-item">
-   <div class="person">
-    <p class="person-description">Имя</p>
-    <input type="text" class="person-text" required placeholder="Наташа">
-    <p class="person-description">Телефон</p>
-    <input type="tel" class="person-text" id="MyTel" required placeholder="+7 (900) 900-90-90">
-    <p class="person-description">E-mail</p>
-    <input type="email" class="person-text" required placeholder="info@gmail.com">
-    <p class="person-description person-otstup">Способ получения</p>
-    </div>
+ <form action="{% url 'order' %}" method="POST">
+  {% csrf_token %}
+ <div class="fon_color">
+  <div class="forma fon_color-item">
+ <div class="person">
+  <p class="person-description">Имя</p>
+  <input type="text" class="person-text" required value="{{user.name}}" name="name">
+  <p class="person-description">Телефон</p>
+  <input type="tel" class="person-text" id="MyTel" required placeholder="+7 (900) 900-90-90" value="{{user.phone}}" name="phone">
+  <p class="person-description">E-mail</p>
+  <input type="email" class="person-text" required placeholder="info@gmail.com" value="{{user.email}}" name="email">
+  <p class="person-description person-otstup">Способ получения</p>
+  </div>
 
-<script src="orderway.js"></script>
+<script src="{% static 'orderway.js' %}"></script>
 <div class="radio">
-<label><input type="radio" name="delivery" onChange="Selected(this)" value="no">Самовызов из шоурума</label><br>
+<label><input type="radio" name="delivery" onChange="Selected(this)" value="no" required>Самовызов из шоурума</label><br>
 <label><input type="radio" name="delivery" onChange="Selected(this)" value="yes">Мне нужна доставка</label></div>
 <div class="adress" id="yes">
-<p class="adress-description">Почтовый индекс</p>
-<input type="text" class="adress-text" placeholder="101000" >
-<p class="adress-description">Населенный пункт</p>
-<input type="text" class="adress-text" placeholder="Москва">
-<p class="adress-description">Улица</p>
-<input type="text" class="adress-text" placeholder="Плеханова">
-<p class="adress-description">Дом</p>
-<input type="text" class="adress-text" placeholder="12а">
-<p class="adress-description">Квартира/Офис</p>
-<input type="text" class="adress-text" placeholder="101000">
-<p class="adress-description">Комментарий</p>
-<input type="text" class="adress-koment">
+  <p class="adress-description">Почтовый индекс</p>
+  <input type="text" class="adress-text" placeholder="101000" name="index">
+  <p class="adress-description">Населенный пункт</p>
+  <input type="text" class="adress-text" placeholder="Москва" name="town">
+  <p class="adress-description">Улица</p>
+  <input type="text" class="adress-text" placeholder="Плеханова" name="street">
+  <p class="adress-description">Дом</p>
+  <input type="text" class="adress-text" placeholder="12а" name="house">
+  <p class="adress-description">Квартира/Офис</p>
+  <input type="text" class="adress-text" placeholder="101000" name="apart">
+  <p class="adress-description">Комментарий</p>
+  <input type="text" class="adress-koment" name="comment">
 </div>
 <div class="adress" id="no">
 <p class="adress-went">Наш адресс: Санкт-Петербург, Выборгское шоссе 5/1</p></div>
 </div>
+
+
 <div class="ours fon_color-item">
-    <div class="level_1"><h3 class="level_1-title">Ваш заказ</h3></div>
-    <div class="level_2">
-      <div class="ryd level_2-item">
-      <p class="ryd-description">Кол-во товаров:</p>
-      <p class="ryd-peremen">4 шт</p>
-    </div>
+  <div class="level_1"><h3 class="level_1-title">Ваш заказ</h3></div>
+  <div class="level_2">
     <div class="ryd level_2-item">
-      <p class="ryd-description">Сумма:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-      <p class="ryd-peremen">24 000 ₽</p>
+    <p class="ryd-description">Кол-во товаров:</p>
+    <p class="ryd-peremen">{{user.cart_amount}} шт.</p>
+  </div>
+  <div class="ryd level_2-item">
+    <p class="ryd-description">Сумма:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+    <p class="ryd-peremen">{{user.cart_full_price}} ₽</p>
+  </div>
+  </div>
+  <div class="ryd level_3-item">
+    <p class="ryd-description"><b>Итого&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></p>
+    <p class="ryd-peremen"><b>{{user.cart_full_price}} ₽</b></p>
+  </div>
+  <form action="{% url 'order' %}" method="POST">
+    <button type="submit" class="ours-button"><span class="ours-link">ОФОРМИТЬ ЗАКАЗ</span></button>
+  </form>
+</div>
+
+</div>
+</form>
+
+<script src="{% static 'telefon.js' %}"></script>
+
+<!-- <div id="openModal" class="modal">
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3 class="modal-title">Потвердите номер телефона</h3>
+      <a href="#close" title="Close" class="closes">×</a>
     </div>
+    <div class="modal-body">    
+      <p class="modal-subtitle">Мы отправим СМС с кодом потверждения</p>
+      <p class="modal-telefon" id="mytelefon"></p>
+      <button type="submit" onClick="GetNumber()" class="modal-button"><a class="modal-link"  href="#openModal2">ПОЛУЧИТЬ КОД</a></button>
+      <p class="modal-description">&nbsp;&nbsp;&nbsp;Нажимая на кнопку вы принимаете политику конфиденциальности и пользовательское соглашение</p>
     </div>
-    <div class="ryd level_3-item">
-      <p class="ryd-description"><b>Итого&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></p>
-      <p class="ryd-peremen"><b>24 000 ₽</b></p>
-    </div>
-   <button onClick="GetNumber()" type="submit" class="ours-button"><a class="ours-link" href="#openModal">ОФОРМИТЬ ЗАКАЗ</a></button>
   </div>
 </div>
-<script src="telefon.js"></script>
-<div id="openModal" class="modal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3 class="modal-title">Потвердите номер телефона</h3>
-        <a href="#close" title="Close" class="closes">×</a>
-      </div>
-      <div class="modal-body">    
-        <p class="modal-subtitle">Мы отправим СМС с кодом потверждения</p>
-        <p class="modal-telefon" id="mytelefon"></p>
-        <button type="submit" onClick="GetNumber()" class="modal-button"><a class="modal-link"  href="#openModal2">ПОЛУЧИТЬ КОД</a></button>
-        <p class="modal-description">&nbsp;&nbsp;&nbsp;Нажимая на кнопку вы принимаете политику конфиденциальности и пользовательское соглашение</p>
-      </div>
-    </div>
-  </div>
 </div>
 
 <div id="openModal2" class="modal">
 <div class="modal-dialog">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h2 class="modal-title mtt_center">Введите код</h3>
-      <a href="#close" title="Close" class="closes">×</a>
-    </div>
-    <div class="modal-body">    
-      <p class="modal-subtitle msb_center">Мы отправили код на номер</p>
-      <a class="modal-src" href=""><p class="modal-linktel" id="mylinktel"></p></a>
-      <input class="modal-password" type="password">
-      <button type="submit" class="modal-button"><a class="modal-link" href="success.html">ОТПРАВИТЬ КОД</a></button>
-      <p class="modal-description">Вводя код, вы принимаете политику конфиденциальности и пользовательское соглашение</p>
-    </div>
+<div class="modal-content">
+  <div class="modal-header">
+    <h2 class="modal-title mtt_center">Введите код</h3>
+    <a href="#close" title="Close" class="closes">×</a>
   </div>
+  <div class="modal-body">    
+    <p class="modal-subtitle msb_center">Мы отправили код на номер</p>
+    <a class="modal-src" href=""><p class="modal-linktel" id="mylinktel"></p></a>
+    <input class="modal-password" type="password">
+    <button type="submit" class="modal-button"><a class="modal-link" href="success.html">ОТПРАВИТЬ КОД</a></button>
+    <p class="modal-description">Вводя код, вы принимаете политику конфиденциальности и пользовательское соглашение</p>
   </div>
 </div>
-
 </div>
-     <br><br><br>
+</div> -->
 
 {% endblock %}

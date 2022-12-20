@@ -40,3 +40,14 @@ class ContactsChoices(models.TextChoices):
     VK = 'vk'
     YOUTUBE = 'youtube'
     AVITO = 'avito'
+
+from django.template.defaulttags import register
+
+@register.filter
+def get_range(value, step : int = 1):
+    return range(1,value+1, step)
+
+class Cart(object):
+    def __init__(self, item, amount):
+        self.item = item
+        self.amount = amount

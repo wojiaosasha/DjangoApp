@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, Product, Amount, CustomUser, InfoPage, ProductImage, InfoPageImage, Contact, SiteSettings
+from .models import Category, Product, Amount, CustomUser, InfoPage, ProductImage, InfoPageImage, Contact, SiteSettings, ProductInfo, Order
 from django import forms
 from django.forms import MultiWidget, TextInput
 from django.contrib.postgres.forms import SimpleArrayField
@@ -19,6 +19,8 @@ admin.site.register(CustomUser)
 admin.site.register(InfoPage)
 admin.site.register(ProductImage)
 admin.site.register(InfoPageImage)
+admin.site.register(ProductInfo)
+admin.site.register(Order)
 
 class YourModelForm(forms.ModelForm):
 
@@ -32,14 +34,8 @@ class YourModelForm(forms.ModelForm):
         product = super().save(commit=False)
 
         sizes = product.sizes
-        colors = product.colors
-
         # sizes = self.cleaned_data.get('sizes', None)
-        # colors = self.cleaned_data.get('colors', None)
-
-        # f1 = self.cleaned_data.get('extra_field', None)
-        # f2 = self.cleaned_data.get('ex_field', None)
-        # filename = f1.name
+    
         # path = default_storage.save('images/' + filename, ContentFile(f1.read()))
         # newpath = settings.MEDIA_ROOT + '/' + path
         # imf = ImageFieldFile(instance=Product, field=models.ImageField(), name='images/'+filename)
@@ -49,10 +45,11 @@ class YourModelForm(forms.ModelForm):
         product.save()
 
         # проверка на уменьшение количества атрибутов
-
-        for size in sizes:
-            for color in colors:
-                Amount.objects.get_or_create(product_id = product.pk, size=size, color=color)
+        if sizes:
+            for size in sizes:
+                Amount.objects.get_or_create(product_id = product.pk, size=size)
+        else:
+            Amount.objects.get_or_create(product_id = product.pk, size=None)
         
         return product
 
@@ -64,6 +61,6 @@ class YourModelForm(forms.ModelForm):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ['code', 'name']
+    list_display = ['code', 'color']
 
     form = YourModelForm

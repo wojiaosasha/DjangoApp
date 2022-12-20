@@ -1,0 +1,15 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+{% load static %}
+
+<div class="done">
+    <img class="done-img" src="{% static 'img/success.svg' %}">
+    <h2 class="done-title">ЗАЯВКА УСПЕШНО ОТПРАВЛЕНА!</h2>
+    <p class="done-description">Спасибо за заявку, скоро с вами свяжется наш менеджер</p>
+    <form action="{% url 'main' %}">
+        <button class="done-button" type="submit"><span class="done-link">НА ГЛАВНУЮ</span></button>
+    </form>
+</div>
+
+{% endblock %}

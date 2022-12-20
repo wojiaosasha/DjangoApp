@@ -1,0 +1,77 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+{% load static %}
+
+<guide>
+    <ul class='guide'>
+        <li class="guide-item"><a class="guide-link" href="{% url 'catalog' %}">&lt; Вернуться в каталог</a></li>
+        <li class="guide-item">|</li>
+        <li class="guide-item guide-title" >КОРЗИНА</li>
+    </ul>
+   </guide>
+<div class="carta">
+    <div class="carta-item l_bl">
+        
+        {% for i in user.cart.all %}
+        <div class="goods">
+            <div class="goods-item picture">
+                <a href="{% url 'product' i.product.product.code %}">
+                    <img class="picture-img" src="{{i.product.product.title_image.url}}" alt="img">
+                </a>
+            </div>
+            <div class="goods-item annot">
+                <h2 class="annot-title">{{i.product.product.name}}, {{i.product.product.color}}</h2>
+                <form action="{% url 'cart' %}" method="POST">
+                {% csrf_token %}
+                <span class="annot-close">
+                    <input type="hidden" name="code" value="{{i.product.product.code}}">
+                    <input type="hidden" name="size" value="{{i.product.size}}">
+                    <input type="image" src="{% static 'img/close.svg' %}">
+                    <!-- <img  src="{% static 'img/close.svg' %}"> -->
+                </span> 
+                </form>
+                <p class="annot-description">Размер: <b>{{i.product.size}}</b></p>
+                <div class="mini_goods">
+                 <div class="mini_goods-item mcount">
+                  <p class="mcount-description">Количество</p>
+                  <div class="counter_2">
+                      <button class="counter_2-minus" type="button" onclick="this.nextElementSibling.stepDown()">-</button>
+                      <input  type="number" min="0" max="100" value="{{i.amount}}" readonly class="counter_2-raz">
+                      <button class="counter_2-plus" type="button" onclick="this.previousElementSibling.stepUp()">+</button>
+                    </div>
+              </div>
+                 <div class="mini_goods-item mprice">
+                  <p class="mprice-description">Стоимость</p>
+                  <p class="mprice-main">{{i.product.product.price}} ₽</p>
+              </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+
+    <div class="carta-item r_bl">
+            <div class="level_1"><h3 class="level_1-title">Ваша корзина</h3></div>
+            <div class="level_2">
+              <div class="ryd level_2-item">
+              <p class="ryd-description">Кол-во товаров:</p>
+              <p class="ryd-peremen">{{user.cart_amount}} шт.</p>
+            </div>
+            <div class="ryd level_2-item">
+              <p class="ryd-description">Сумма:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+              <p class="ryd-peremen">{{user.cart_full_price}} ₽</p>
+            </div>
+            </div>
+            <div class="ryd level_3-item">
+              <p class="ryd-description"><b>Итого&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></p>
+              <p class="ryd-peremen"><b>{{user.cart_full_price}} ₽</b></p>
+            </div>
+            <form action="{% url 'order' %}" method="GET">
+                <button class="our-button" type="submit"><span class="our-link">ОФОРМИТЬ ЗАКАЗ</span></button>
+            </form>
+    </div>
+</div>
+
+{% endblock %}

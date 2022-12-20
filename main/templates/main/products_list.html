@@ -1,0 +1,110 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+{% load static %}
+
+<guide>
+    <ul class='guide'>
+        <li class="guide-item"><a class="guide-link" href="{% url 'main' %}">Главная</a></li>
+        <li class="guide-item">/</li>
+        <li class="guide-item">Каталог</li>
+        {% block full_category_path %}{% endblock %}
+    </ul>
+   </guide>
+   <br>
+   <sorting>
+   <ul class="sorting">
+   <li class="sorting-item"><h2 class="title">
+    {% block page_name %}{% endblock %}
+   </h1></li>
+   <li class="sorting-item"><select class="sorting-select" name="sort">
+    <option>Сортировать</option>
+    <option value="1">Цена</option>
+    <option value="2">По названию</option>
+  </select></li>
+   </ul>
+  </sorting>
+    <div class="t_space"></div>
+  <script src="{% static 'script.js' %}"></script>
+    
+    {% for i in products %}
+      {% if forloop.first %}
+        {% cycle '<t_novel><ul class="t_novel">' '' '' as opentags %}
+      {% else %}
+        {% cycle opentags %}
+      {% endif %}
+      <li class="t_novel-item">
+        <img src="{{i.title_image.url}}" alt="trench" width="288" height="407" id="ShowHide{{forloop.counter}}">
+        <span 
+        {% if forloop.first %}
+          {% cycle 'class="t_novel-ometa"' 'class="t_novel-tmeta"' 'class="t_novel-fmeta"' as opentags %}
+        {% else %}
+          {% cycle opentags %}
+        {% endif %}>NEW</span>
+
+        <form action="{% url 'favorite' %}" method="POST">
+          {% csrf_token %}
+          <input name="code" type="hidden" value="{{i.code}}">
+          <input type="image"
+            {% if forloop.first %}
+              {% cycle 'class="t_novel-btn"' 'class="t_novel-btn2"' 'class="t_novel-btn3"' as opentags %}
+            {% else %}
+              {% cycle opentags %}
+            {% endif %}
+          src="{% static 'img/Vector(1).svg' %}"> <br>
+        </form>
+
+        <a class="t_novel-link" href="{% url 'product' i.code %}">{{i.name}}, {{i.color}}</a>
+        <p class="t_novel-price">{{i.price}} ₽</p>
+
+        <div id="exemple{{forloop.counter}}" class="t_novel-block"><p class="intl">
+        {% if i.sizes %}
+          Выберите размер:</p>
+          <spisok>
+            <ul class="spisok">
+              {% for j in i.sizes|slice:":4" %}
+                <li class="spisok-item">
+                  <form action="{% url 'cart' %}" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="code" value="{{i.code}}">
+                    <input type="hidden" name="size" value="{{j}}">
+                    <input type="hidden" name="amount" value="{{1}}">
+                    <button class="spisok-button" type="submit">{{j}}</button>
+                  </form>
+                </li>
+              {% endfor %}
+              {% if i.sizes|length > 4 %}
+                <li class="spisok-item">
+                  <button class="spisok-button" type="submit">...</button>
+                </li>
+              {% endif %}
+            </ul>
+          </spisok>
+        {% else %}
+          <br>
+        {% endif %}
+          <button class="backet" type="submit"><a class="backet-link" href="{% url 'product' i.code %}">В КОРЗИНУ</a></button>
+        </div>
+        
+      </li>
+      {% if forloop.first %}
+        {% cycle '' '' '</ul></t_novel>' as closetags %}
+      {% else %}
+        {% cycle closetags %}
+      {% endif %}
+    {% endfor %}
+
+    <page>
+      <ul class="page">
+        <li class="page-item"><button class="page-button" type="submit"><a class="page-link" href="">1</a></button></li>
+        <li class="page-item"><button class="page-button" type="submit"><a class="page-link" href="">2</a></button></li>
+        <li class="page-item"><button class="page-button" type="submit"><a class="page-link" href="">3</a></button></li>
+        <li class="page-item"><button class="page-button" type="submit"><a class="page-link" href="">4</a></button></li>
+        <li class="page-item"><button class="page-button" type="submit"><a class="page-link" href="">5</a></button></li>
+        <li class="page-item"><button class="page-button" type="submit"><a class="page-link" href="">6</a></button></li>
+        <li class="page-item"><button class="page-button" type="submit"><a class="page-link" href="">7</a></button></li>
+        <li class="page-item page-next"><a class="page-olink" href="">Далее</a></li>
+      </ul>
+    </page>
+
+{% endblock %}

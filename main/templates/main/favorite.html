@@ -1,0 +1,77 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+{% load static %}
+
+<guide>
+    <ul class='guide'>
+        <li class="guide-item"><a class="guide-link" href="{% url 'catalog' %}">&lt; Вернуться в каталог</a></li>
+        <li class="guide-item">|</li>
+        <li class="guide-item guide-title" >Избранное</li>
+    </ul>
+   </guide>
+<div class="carta">
+    <div class="carta-item l_bl">
+        
+        {% for i in favorite %}
+        <div class="goods">
+            <div class="goods-item picture">
+                <a href="{% url 'product' i.code %}">
+                    <img class="picture-img" src="{{i.title_image.url}}" alt="img">
+                </a>
+            </div>
+            <div class="goods-item annot">
+                <h2 class="annot-title">{{i.name}}, {{i.color}}</h2>
+                <!-- <a class="annot-close" href=""> -->
+                <!-- <button class="annot-close">
+                    <img  src="{% static 'img/close.svg' %}">
+                </button> -->
+                <form action="{% url 'favorite' %}" method="POST">
+                    {% csrf_token %}
+                    <input name="delete" type="hidden" value="true">
+                    <input name="code" type="hidden" value="{{i.code}}">
+                    <input class="annot-close" type="image" src="{% static 'img/close.svg' %}">
+                </form>
+                <!-- </a>  -->
+                <!-- <p class="annot-description">Размер: <b>000</b></p> -->
+                <div class="mini_goods">
+                 <!-- <div class="mini_goods-item mcount">
+                  <p class="mcount-description">Количество</p>
+                  <div class="counter_2">
+                      <button class="counter_2-minus" type="button" onclick="this.nextElementSibling.stepDown()">-</button>
+                      <input  type="number" min="0" max="100" value="0" readonly class="counter_2-raz">
+                      <button class="counter_2-plus" type="button" onclick="this.previousElementSibling.stepUp()">+</button>
+                    </div>
+              </div> -->
+                 <div class="mini_goods-item mprice">
+                  <p class="mprice-description">Стоимость</p>
+                  <p class="mprice-main">{{i.price}} ₽</p>
+              </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+
+    <!-- <div class="carta-item r_bl">
+            <div class="level_1"><h3 class="level_1-title">Ваша корзина</h3></div>
+            <div class="level_2">
+              <div class="ryd level_2-item">
+              <p class="ryd-description">Кол-во товаров:</p>
+              <p class="ryd-peremen">{{user.cart_amount}} шт.</p>
+            </div>
+            <div class="ryd level_2-item">
+              <p class="ryd-description">Сумма:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+              <p class="ryd-peremen">{{user.cart_full_price}} ₽</p>
+            </div>
+            </div>
+            <div class="ryd level_3-item">
+              <p class="ryd-description"><b>Итого&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></p>
+              <p class="ryd-peremen"><b>{{user.cart_full_price}} ₽</b></p>
+            </div>
+            <button class="our-button"><a class="our-link" href="{% url 'order' %}">ОФОРМИТЬ ЗАКАЗ</a></button>
+    </div> -->
+</div>
+
+{% endblock %}

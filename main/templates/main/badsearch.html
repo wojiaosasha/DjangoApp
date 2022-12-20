@@ -3,9 +3,18 @@
 {% block content %}
 {% load static %}
 
+<!-- <style>
+    body{
+    background-image: url({% static 'img/holy.png' %});
+    background-position: bottom -270px left 50%;
+    background-repeat: no-repeat;
+    background-size: 37% 70%;
+    }
+</style> -->
+
 <guide>
     <ul class='guide'>
-        <li class="guide-item"><a class="guide-link" href="index.html">Главная</a></li>
+        <li class="guide-item"><a class="guide-link" href="{% url 'main' %}">Главная</a></li>
         <li class="guide-item">/</li>
         <li class="guide-item">Результаты поиска</li>
     </ul>

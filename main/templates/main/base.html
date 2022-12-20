@@ -1,4 +1,5 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,6 +9,7 @@
     <title>LOGO</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
     <link rel="stylesheet" href="http://fonts.cdnfonts.com/css/pt-root-ui">
+    <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
@@ -19,9 +21,9 @@
                 <li class="nav-item"><a class="nav-link" href="{% url 'infopage' i.slug %}">{{i.title}}</a></li>
               {% endfor %}
             </ul>
-          </nav>
-       
+          </nav> 
     <nav>
+
         <ul class='nav'>
             <li class="nav-item"><img class="nav-img" src="{% static instagram.icon %}" alt="{{instagram.name}}" width="15" height="15">
               <a class="nav-link" href="{{instagram.link}}">logo</a>
@@ -32,100 +34,339 @@
           </ul>
         </nav>
     </div>
+
     <div class="poisk">
+      <script src="{% static 'search.js' %}"></script>
         <p class="poisk-deskription">logo</p>
           <form action="{% url 'search' %}" method="get">
-            <div class="dropdown">
-            <button class="poisk-button" id="callback-button"><img class="poisk-img" src="{% static 'img/Component.svg' %}" alt="menu" width="15" height="16" ><a class="poisk-link" href="">КАТАЛОГ</a></button>
-            <input name="q" class="poisk-input" type="text">
-            <div class="dropdown-content" >
-              <div class="directory">
-              <div class="directory-item close">
-               <ul class="close">
-                 <li class="close-item close-title"><a class="close-link" href="">ОДЕЖДА</a></li>
-                 <li class="close-item"><a class="close-link" href="">Юбки</a></li>
-                 <li class="close-item"><a class="close-link" href="">Джемеперы</a></li>
-                 <li class="close-item"><a class="close-link" href="">Джинсы</a></li>
-                 <li class="close-item"><a class="close-link" href="">Брюки, шорты</a></li>
-                 <li class="close-item"><a class="close-link" href="">Футболки, топы, лонгсливы</a></li>
-                 <li class="close-item"><a class="close-link" href="">Блузки, рубашки, туники</a></li>
-                 <li class="close-item"><a class="close-link" href="">Платья</a></li>
-                 <li class="close-item"><a class="close-link" href="">Толстовки</a></li>
-                 <li class="close-item"><a class="close-link" href="">Костюмы</a></li>
-                 <li class="close-item">
-                    <div class="dropdown">
-                        <a class="close-link" href="">Оверол</a>
-                    </div>
-                    <ul class="close">
-                        <li class="close-item"><a class="close-link" href="">Оверол</a></li>
-                        <li class="close-item"><a class="close-link" href="">Оверол</a></li>
-                        <li class="close-item"><a class="close-link" href="">Оверол</a></li>
-                    </ul>
-                 </li>
+         <div class="drop_arm">
+      <button class="poisk-button" id="callback-button" type="button"><img class="poisk-img" src="{% static 'img/Component.svg' %}" alt="menu" width="15" height="16" >
+        <a class="poisk-link" href="{% url 'catalog' %}">КАТАЛОГ</a></button>
+        
+        <input class="poisk-input" type="search" id="testInput" onsearch = "testFunction()" name="q">
+       <div class="drop_menu">
+      
+
+      {% for i in categories %}
+        
+      {% endfor %}
+      
+
+        <li class="submenu"><a href="#">ОДЕЖДА</a>
+          <ul class="topmenu">
+            <li class="submenu"><a href="#">Юбки</a>
+              <ul class="topmenu">
+                <li class="submenu"><a href="#">Уровень 1</a></li>
+                <li class="submenu"><a href="#">Уровень 2</a></li>
+                <li class="submenu"><a href="#">Уровень 3</a></li>
               </ul>
-              </div>
-       
-              <div class="directory-item outwear">
-               <ul class="outwear">
-                 <li class="outwear-item outwear-title"><a class="outwear-link" href="">ВЕРХНЯЯ ОДЕЖДА</a></li>
-                 <li class="outwear-item"><a class="outwear-link" href="">Куртки</a></li>
-                 <li class="outwear-item"><a class="outwear-link" href="">Джинсовые куртки</a></li>
-                 <li class="outwear-item"><a class="outwear-link" href="">Пальто</a></li>
-                 <li class="outwear-item"><a class="outwear-link" href="">Пуховики</a></li>
-                 <li class="outwear-item"><a class="outwear-link" href="">Плащи</a></li>
-                 <li class="outwear-item"><a class="outwear-link" href="">Ветровки</a></li>
-                 <li class="outwear-item"><a class="outwear-link" href="">Кэмэлюкс</a></li>
-              </ul>
-              </div>
-       
-              <div class="directory-item accessory">
-               <ul class="accessory">
-                 <li class="accessory-item accessory-title"><a class="accessory-link" href="">АКСЕССУАРЫ</a></li>
-                 <li class="accessory-item"><a class="accessory-link" href="">Солнечные очки</a></li>
-                 <li class="accessory-item"><a class="accessory-link" href="">Ремни</a></li>
-                 <li class="accessory-item"><a class="accessory-link" href="">Перчатки</a></li>
-                 <li class="accessory-item"><a class="accessory-link" href="">Бижутерия</a></li>
-                 <li class="accessory-item"><a class="accessory-link" href="">Аксессуары Дял Кубов</a></li>
-              </ul>
-              </div>
-       
-              <div class="directory-item other">
-               <ul class="other">
-                 <li class="other-item other-title"><a class="other-link" href="">ЖАКЕТЫ И ПИДЖАКИ</a></li>
-                 <li class="other-item other-title"><a class="other-link" href="">ОБУВЬ</a></li>
-                 <li class="other-item other-title"><a class="other-link" href="">СУМКИ И КОШЕЛЬКИ</a></li>
-                 <li class="other-item other-title"><a class="other-link" href="">ШАПКИ, ШЛЯПЫ, ШАРФЫ</a></li>
-              </ul>
-              </div>
-              </div></div></div>
-          </form>
-    
-          <ul class='van'>
-            <li class="van-item"><img class="van-img" src="{% static 'img/Vector(1).svg' %}" alt="heart" width="20" height="20" ><a class="van-link" href="">Избранное</a></li>
-            <li class="van-item">
-              <img class="van-img" src="{% static 'img/user 3.svg' %}" alt="people" width="20" height="20" ><a class="van-link" href="#openModal">Вход/Регистрация</a>
             </li>
-            {% if user.is_authenticated %}
-              <li class="van-item"><img class="van-img" src="{% static 'img/basket 3.svg' %}" alt="basket" width="20" height="20" >
-                <a class="van-link" href="">{{user.cart_full_price}} ₽ / {{user.cart_amount}} шт.</a>
-              </li>
-            {% else %}
-            <li class="van-item"><img class="van-img" src="{% static 'img/basket 3.svg' %}" alt="basket" width="20" height="20" >
-              Вы не юзер :(
+            <li class="submenu"><a href="#">Джемеперы</a>
+              <ul class="topmenu">
+                <li class="submenu"><a href="#">Уровень 1</a></li>
+                <li class="submenu"><a href="#">Уровень 2</a></li>
+                <li class="submenu"><a href="#">Уровень 3</a></li>
+              </ul>
             </li>
-            {% endif %}
-            
+            <li class="submenu"><a href="#">Джинсы</a>
+              <ul class="topmenu">
+                <li class="submenu"><a href="#">Уровень 1</a></li>
+                <li class="submenu"><a href="#">Уровень 2</a></li>
+                <li class="submenu"><a href="#">Уровень 3</a></li>
+              </ul>
+            </li>
+            <li class="submenu"><a href="#">Брюки, шорты</a>
+              <ul class="topmenu">
+                <li class="submenu"><a href="#">Уровень 1</a></li>
+                <li class="submenu"><a href="#">Уровень 2</a></li>
+                <li class="submenu"><a href="#">Уровень 3</a></li>
+              </ul>
+            </li>
+            <li class="submenu"><a href="#">Футболки, топы, лонгсливы</a>
+              <ul class="topmenu">
+                <li class="submenu"><a href="#">Уровень 1</a></li>
+                <li class="submenu"><a href="#">Уровень 2</a></li>
+                <li class="submenu"><a href="#">Уровень 3</a></li>
+              </ul>
+            </li>
+            <li class="submenu"><a href="#">Блузки, рубашки, туники</a>
+              <ul class="topmenu">
+                <li class="submenu"><a href="#">Уровень 1</a></li>
+                <li class="submenu"><a href="#">Уровень 2</a></li>
+                <li class="submenu"><a href="#">Уровень 3</a></li>
+              </ul>
+            </li>
+            <li class="submenu"><a href="#">Платья</a>
+              <ul class="topmenu">
+                <li class="submenu"><a href="#">Уровень 1</a></li>
+                <li class="submenu"><a href="#">Уровень 2</a></li>
+                <li class="submenu"><a href="#">Уровень 3</a></li>
+              </ul>
+            </li>
+            <li class="submenu"><a href="#">Толстовки</a>
+              <ul class="topmenu">
+                <li class="submenu"><a href="#">Уровень 1</a></li>
+                <li class="submenu"><a href="#">Уровень 2</a></li>
+                <li class="submenu"><a href="#">Уровень 3</a></li>
+              </ul>
+            </li>
+            <li class="submenu"><a href="#">Костюмы</a>
+              <ul class="topmenu">
+                <li class="submenu"><a href="#">Уровень 1</a></li>
+                <li class="submenu"><a href="#">Уровень 2</a></li>
+                <li class="submenu"><a href="#">Уровень 3</a></li>
+              </ul>
+            </li>
+            <li class="submenu"><a href="#">Оверол</a>
+              <ul class="topmenu">
+                <li class="submenu"><a href="#">Уровень 1</a></li>
+                <li class="submenu"><a href="#">Уровень 2</a></li>
+                <li class="submenu"><a href="#">Уровень 3</a></li>
+              </ul>
+            </li>
           </ul>
-         
-    </div>
+        </li>
+
+        <li class="submenu"><a href="#">ВЕРХНЯЯ ОДЕЖДА</a>
+      <ul class="topmenu">
+        <li class="submenu"><a href="#">Куртки</a>
+          <ul class="topmenu">
+            <li class="submenu"><a href="#">Уровень 1</a></li>
+            <li class="submenu"><a href="#">Уровень 2</a></li>
+            <li class="submenu"><a href="#">Уровень 3</a></li>
+          </ul>
+        </li>
+        <li class="submenu"><a href="#">Джинсовые куртки</a>
+          <ul class="topmenu">
+            <li class="submenu"><a href="#">Уровень 1</a></li>
+            <li class="submenu"><a href="#">Уровень 2</a></li>
+            <li class="submenu"><a href="#">Уровень 3</a></li>
+          </ul>
+        </li>
+        <li class="submenu"><a href="#">Пальто</a>
+          <ul class="topmenu">
+            <li class="submenu"><a href="#">Уровень 1</a></li>
+            <li class="submenu"><a href="#">Уровень 2</a></li>
+            <li class="submenu"><a href="#">Уровень 3</a></li>
+          </ul>
+        </li>
+        <li class="submenu"><a href="#">Пуховики</a>
+          <ul class="topmenu">
+            <li class="submenu"><a href="#">Уровень 1</a></li>
+            <li class="submenu"><a href="#">Уровень 2</a></li>
+            <li class="submenu"><a href="#">Уровень 3</a></li>
+          </ul>
+        </li>
+        <li class="submenu"><a href="#">Плащи</a>
+          <ul class="topmenu">
+            <li class="submenu"><a href="#">Уровень 1</a></li>
+            <li class="submenu"><a href="#">Уровень 2</a></li>
+            <li class="submenu"><a href="#">Уровень 3</a></li>
+          </ul>
+        </li>
+        <li class="submenu"><a href="#">Ветровки</a>
+          <ul class="topmenu">
+            <li class="submenu"><a href="#">Уровень 1</a></li>
+            <li class="submenu"><a href="#">Уровень 2</a></li>
+            <li class="submenu"><a href="#">Уровень 3</a></li>
+          </ul>
+        </li>
+        <li class="submenu"><a href="#">Кэмэлюкс</a>
+          <ul class="topmenu">
+            <li class="submenu"><a href="#">Уровень 1</a></li>
+            <li class="submenu"><a href="#">Уровень 2</a></li>
+            <li class="submenu"><a href="#">Уровень 3</a></li>
+          </ul>
+        </li>
+          </ul>
+        </li>
+
+
+        <li class="submenu"><a href="#">АКСЕССУАРЫ</a>
+          <ul class="topmenu">
+            <li class="submenu"><a href="#">Солнечные очки</a>
+              <ul class="topmenu">
+                <li class="submenu"><a href="#">Уровень 1</a></li>
+                <li class="submenu"><a href="#">Уровень 2</a></li>
+                <li class="submenu"><a href="#">Уровень 3</a></li>
+              </ul>
+            </li>
+            <li class="submenu"><a href="#">Ремни</a>
+              <ul class="topmenu">
+                <li class="submenu"><a href="#">Уровень 1</a></li>
+                <li class="submenu"><a href="#">Уровень 2</a></li>
+                <li class="submenu"><a href="#">Уровень 3</a></li>
+              </ul>
+            </li>
+            <li class="submenu"><a href="#">Перчатки</a>
+              <ul class="topmenu">
+                <li class="submenu"><a href="#">Уровень 1</a></li>
+                <li class="submenu"><a href="#">Уровень 2</a></li>
+                <li class="submenu"><a href="#">Уровень 3</a></li>
+              </ul>
+            </li>
+            <li class="submenu"><a href="#">Бижутерия</a>
+              <ul class="topmenu">
+                <li class="submenu"><a href="#">Уровень 1</a></li>
+                <li class="submenu"><a href="#">Уровень 2</a></li>
+                <li class="submenu"><a href="#">Уровень 3</a></li>
+              </ul>
+            </li>
+            <li class="submenu"><a href="#">Аксессуары для кубов</a>
+              <ul class="topmenu">
+                <li class="submenu"><a href="#">Уровень 1</a></li>
+                <li class="submenu"><a href="#">Уровень 2</a></li>
+                <li class="submenu"><a href="#">Уровень 3</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li class="submenu"><a href="#">ЖАКЕТЫ И ПИДЖАКИ</a>
+          <ul class="topmenu">
+            <li class="submenu"><a href="#">Уровень 1</a>
+              <ul class="topmenu">
+                <li class="submenu"><a href="#">Уровень 1/1</a></li>
+                <li class="submenu"><a href="#">Уровень 1/2</a></li>
+                <li class="submenu"><a href="#">Уровень 1/3</a></li>
+              </ul></li>
+            <li class="submenu"><a href="#">Уровень 2</a>
+              <ul class="topmenu">
+                <li class="submenu"><a href="#">Уровень 2/1</a></li>
+                <li class="submenu"><a href="#">Уровень 2/2</a></li>
+                <li class="submenu"><a href="#">Уровень 2/3</a></li>
+              </ul>
+            </li>
+            <li class="submenu"><a href="#">Уровень 3</a>
+              <ul class="topmenu">
+                <li class="submenu"><a href="#">Уровень 3/1</a></li>
+                <li class="submenu"><a href="#">Уровень 3/2</a></li>
+                <li class="submenu"><a href="#">Уровень 3/3</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li class="submenu"><a href="#">ОБУВЬ</a>
+          <ul class="topmenu">
+            <li class="submenu"><a href="#">Уровень 1</a>
+              <ul class="topmenu">
+                <li class="submenu"><a href="#">Уровень 1/1</a></li>
+                <li class="submenu"><a href="#">Уровень 1/2</a></li>
+                <li class="submenu"><a href="#">Уровень 1/3</a></li>
+              </ul></li>
+            <li class="submenu"><a href="#">Уровень 2</a>
+              <ul class="topmenu">
+                <li class="submenu"><a href="#">Уровень 2/1</a></li>
+                <li class="submenu"><a href="#">Уровень 2/2</a></li>
+                <li class="submenu"><a href="#">Уровень 2/3</a></li>
+              </ul>
+            </li>
+            <li class="submenu"><a href="#">Уровень 3</a>
+              <ul class="topmenu">
+                <li class="submenu"><a href="#">Уровень 3/1</a></li>
+                <li class="submenu"><a href="#">Уровень 3/2</a></li>
+                <li class="submenu"><a href="#">Уровень 3/3</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li class="submenu"><a href="#">СУМКИ И КОШЕЛЬКИ</a>
+          <ul class="topmenu">
+            <li class="submenu"><a href="#">Уровень 1</a>
+              <ul class="topmenu">
+                <li class="submenu"><a href="#">Уровень 1/1</a></li>
+                <li class="submenu"><a href="#">Уровень 1/2</a></li>
+                <li class="submenu"><a href="#">Уровень 1/3</a></li>
+              </ul></li>
+            <li class="submenu"><a href="#">Уровень 2</a>
+              <ul class="topmenu">
+                <li class="submenu"><a href="#">Уровень 2/1</a></li>
+                <li class="submenu"><a href="#">Уровень 2/2</a></li>
+                <li class="submenu"><a href="#">Уровень 2/3</a></li>
+              </ul>
+            </li>
+            <li class="submenu"><a href="#">Уровень 3</a>
+              <ul class="topmenu">
+                <li class="submenu"><a href="#">Уровень 3/1</a></li>
+                <li class="submenu"><a href="#">Уровень 3/2</a></li>
+                <li class="submenu"><a href="#">Уровень 3/3</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li class="submenu"><a href="#">ШАПКИ, ШЛЯПЫ, ШАРФЫ</a>
+          <ul class="topmenu">
+            <li class="submenu"><a href="#">Уровень 1</a>
+              <ul class="topmenu">
+                <li class="submenu"><a href="#">Уровень 1/1</a></li>
+                <li class="submenu"><a href="#">Уровень 1/2</a></li>
+                <li class="submenu"><a href="#">Уровень 1/3</a></li>
+              </ul></li>
+            <li class="submenu"><a href="#">Уровень 2</a>
+              <ul class="topmenu">
+                <li class="submenu"><a href="#">Уровень 2/1</a></li>
+                <li class="submenu"><a href="#">Уровень 2/2</a></li>
+                <li class="submenu"><a href="#">Уровень 2/3</a></li>
+              </ul>
+            </li>
+            <li class="submenu"><a href="#">Уровень 3</a>
+              <ul class="topmenu">
+                <li class="submenu"><a href="#">Уровень 3/1</a></li>
+                <li class="submenu"><a href="#">Уровень 3/2</a></li>
+                <li class="submenu"><a href="#">Уровень 3/3</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+
+
+      </ul>
+
+
+      </div>
+      </div>
+      </form>
+      
+      <ul class='van'>
+        <!-- <li class="van-item"><img class="van-img" src="{% static 'img/Vector(1).svg' %}" alt="heart" width="20" height="20" >
+          <a class="van-link" href="">Избранное</a></li>
+        <li class="van-item">
+          <img class="van-img" src="{% static 'img/user 3.svg' %}" alt="people" width="20" height="20" ><a class="van-link" href="#openModal4">Вход/Регистрация</a>
+        </li> -->
+        {% if user.is_authenticated %}
+          <li class="van-item"><img class="van-img" src="{% static 'img/Vector(1).svg' %}" alt="heart" width="20" height="20" >
+            <a class="van-link" href="{% url 'favorite' %}">Избранное</a></li>
+          <li class="van-item">
+            <img class="van-img" src="{% static 'img/user 3.svg' %}" alt="people" width="20" height="20" >
+            <a class="van-link" href="{% url 'logout' %}">Выход</a>
+          </li>
+          <li class="van-item"><img class="van-img" src="{% static 'img/basket 3.svg' %}" alt="basket" width="20" height="20" >
+            <a class="van-link" href="{% url 'cart' %}">{{user.cart_full_price}} ₽ / {{user.cart_amount}} шт.</a>
+          </li>
+        {% else %}
+        <li class="van-item"><img class="van-img" src="{% static 'img/Vector(1).svg' %}" alt="heart" width="20" height="20" >
+          <a class="van-link" href="#openModal4">Избранное</a></li>
+        <li class="van-item">
+          <img class="van-img" src="{% static 'img/user 3.svg' %}" alt="people" width="20" height="20" >
+          <a class="van-link" href="#openModal4">Вход/Регистрация</a>
+        </li>
+        <li class="van-item"><img class="van-img" src="{% static 'img/basket 3.svg' %}" alt="basket" width="20" height="20" >
+          <a class="van-link" href="#openModal4">Корзина</a>
+        </li>
+        {% endif %}
+      </ul>      
+      </div>
+
     </header>
-    {% block content %}{% endblock %}
-    <footer>
+    <div class="wrapper">
+      <div class="content">
+        {% block content %}{% endblock %}
+      </div>
+    <div class="footer">
         <div class="tblock tblock-dark">
           <end>
             <ul class='end'>
               <li class="end-name">logo</li>
-              <li class="end-item"><button class="end-button" type=""><a class="end-link" href="{{whatsapp.link}}">СВЯЗАТЬСЯ С НАМИ</a></button></li>
+              <li class="end-item"><button class="end-button" type="submit"><a class="end-link" href="#openModal3">СВЯЗАТЬСЯ С НАМИ</a></button></li>
               <li class="end-item"><a class="end-link" href="{{settings.privacy_policy.url}}">Политика конфиденциальности</a></li>
               <li class="end-item"><a class="end-link" href="{{settings.terms_of_use.url}}">Пользовательское соглащение</a></li>
           </ul>
@@ -170,6 +411,85 @@
           <p>© logo, 2022</p>
           <p>Developed by F E I P</p>
         </div>
-      </footer>
+      </div>
+    </div>
+
+    <div id="openModal3" class="modal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title mtt_left">ОБРАТНАЯ СВЯЗЬ</h3>
+            <a href="#close" title="Close" class="closes">×</a>
+          </div>
+          <div class="modal-body">    
+            <p class="dsleft">Ваше имя</p>
+            <input class="modal-intext" type="text">
+            <p class="dsleft" required="">Телефон</p>
+            <input class="modal-intext" type="tel">
+            <p class="dsleft">E-mail</p>
+            <input class="modal-intext" type="email">
+            <p class="dsleft">Сообщение</p>
+            <textarea class="modal-intext bigbl"></textarea>
+            <button type="submit" class="modal-button btnbig"><a class="modal-link lkcenter" href="">ОТПРАВИТЬ</a></button>
+            <p class="modal-description">Нажимая кнопку "Отправить", вы принимаете 
+              <a href="{{settings.privacy_policy.url}}">политику конфиденциальности</a> 
+              и 
+              <a href="{{settings.terms_of_use.url}}">пользовательское соглашение</a></p>
+          </div>
+        </div>
+        </div>
+      </div>
+
+      <div id="openModal4" class="modal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h3 class="modal-title">Потвердите номер телефона</h3>
+              <a href="#close" title="Close" class="closes">×</a>
+            </div>
+            <div class="modal-body">    
+              <p class="modal-subtitle">Мы отправим СМС с кодом потверждения</p>
+              <form action="{% url 'getcode' %}" method="POST">
+                {% csrf_token %}
+                <input class="modal-intext" type="tel" name="phone" maxlength="10">
+                <button type="submit" class="modal-button"><span class="modal-link">ПОЛУЧИТЬ КОД</span></button>
+              </form>
+                <!-- <a class="modal-link" href="#openModal5"></a></button> -->
+              <p class="modal-description">&nbsp;&nbsp;&nbsp;Нажимая на кнопку вы принимаете 
+                <a href="{{settings.privacy_policy.url}}">политику конфиденциальности</a> 
+                и 
+                <a href="{{settings.terms_of_use.url}}">пользовательское соглашение</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="openModal5" class="modal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h2 class="modal-title mtt_center">Введите код</h3>
+              <a href="#close" title="Close" class="closes">×</a>
+            </div>
+            <div class="modal-body">    
+              <p class="modal-subtitle msb_center">Мы отправили код на номер</p>
+              <form action="{% url 'login' %}" method="POST">
+              {% csrf_token %}
+                <input class="modal-intext" type="tel" name="phone" maxlength="10">
+                <!-- <input type="hidden" value="1111111111"> -->
+                <input class="modal-password" type="password" name="code", maxlength="4">
+                <button type="submit" class="modal-button">
+                  <span class="modal-link">ОТПРАВИТЬ КОД</span>
+                </button>
+              </form>
+              <p class="modal-description">Вводя код, вы принимаете 
+                <a href="{{settings.privacy_policy.url}}">политику конфиденциальности</a> 
+                и 
+                <a href="{{settings.terms_of_use.url}}">пользовательское соглашение</a></p>
+            </div>
+          </div>
+          </div>
+        </div>
+
     </body>
 </html>

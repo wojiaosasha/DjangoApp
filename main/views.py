@@ -1,6 +1,6 @@
-from django.shortcuts import render as django_render
+from django.shortcuts import render as django_render, redirect
 from django.http import HttpResponse
-from .models import Category, Product, CustomUser, Amount, InfoPage, Contact, SiteSettings
+from .models import Category, Product, CustomUser, Amount, InfoPage, Contact, SiteSettings, ProductInfo
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth import login as login_user, logout as logout_user
@@ -8,10 +8,10 @@ from django.contrib.auth import login as login_user, logout as logout_user
 from .utils import slugify, create_code, ContactsChoices
 from .backends import AuthBackend
 
-def base_info(request):
-    #корзина инфа
-    #инфостраницы, контакты итд
+#везде добавить show true
 
+def base_info(request):
+    categories = Category.objects.filter(parent_id=None)
     infopages = InfoPage.objects.all()
     user = request.user
     settings = SiteSettings.load()
@@ -25,28 +25,29 @@ def base_info(request):
         'whatsapp' : whatsapp, 
         'contacts' : contacts, 
         'instagram' : instagram,
+        'categories' : categories,
         }
+
+def page_404(request):
+    return render(request, 'main/404.html')
 
 def render(request, str, arr={}):
     return django_render(request, str, arr | base_info(request))
 
-def test_url(request):
-    if hasattr(request.user, 'phone') and request.user.is_authenticated:
-        s = 'Customer'
-    else:
-        s = 'Хуй в пальто'
+def index(request): #add random
 
-    print(slugify('я долбоеб'))
+    # print(request.user.cart)
 
-    return render(request, 'main/test.html', {'s' : s, 'pp' : SiteSettings.load().privacy_policy})
-
-def index(request):
     title_categories = Category.objects.all()[:5]
 
-    for i in title_categories:
-        print(i.name)
+    new_products = Product.objects.all()[:10]
 
-    return render(request, 'main/index.html', {'title_categories' : title_categories})
+    info = {'title_categories' : title_categories, 'new_products' : new_products}
+
+    # for i in title_categories:
+    #     print(i.name)
+
+    return render(request, 'main/index.html', info)
 
 def infopage(request, slug = ''):
     infopage = InfoPage.objects.filter(slug=slug).first()
@@ -61,46 +62,39 @@ def catalog(request):
     info = {'products' : products}
     return render(request, 'main/catalog.html', info)
 
-def category(request, slug = ''):
+def category(request, slug = ''): #чота висит
 
-    arr = Category.objects.filter(slug = slug)
-
-    if arr:
-        cat_id = arr[0].id
-
-        def get_products(cat_id, result = Product.objects.none()):
-            arr = Category.objects.filter(parent_id = cat_id, show = True)
-            if arr:
-                for i in arr:
-                    result = get_products(i.id, result)
-                return result
-            else:
-                return result | Product.objects.filter(category_id = cat_id, show = True)
-        
-        products = get_products(cat_id)
-
-        info = {'products': products}
-
+    category = Category.objects.filter(slug = slug).first()
+    if category:
+        products = category.products
+        info = {'products': products, 'category' : category}
         return render(request, 'main/category.html', info)
-
     else: 
-        return HttpResponse("<h1>Ошибочка</h1>")
+        return page_404(request)
 
 def search(request):
-    q = request.GET.get('q')
+    q = request.GET.get('q', None)
+
+    if q:
+        by_description = Product.objects.filter(product_info_id__in=ProductInfo.objects.filter(description__icontains = q))
+        by_name = Product.objects.filter(product_info_id__in=ProductInfo.objects.filter(name__icontains = q))
+        by_code = Product.objects.filter(code__icontains = q)
+        by_color = Product.objects.filter(color__icontains = q)
+
+        products = by_description | by_name | by_code | by_color
     
-    in_name = Product.objects.filter(name__icontains = q)
-    in_description = Product.objects.filter(description__icontains = q)
-    in_code = Product.objects.filter(code__icontains = q)
+    # in_name = Product.objects.filter(name__icontains = q)
+    # in_description = Product.objects.filter(description__icontains = q)
+    # in_code = Product.objects.filter(code__icontains = q)
 
-    products = in_name | in_description | in_code
+    # products = in_name | in_description | in_code
 
-    if products:
-        info = {'products' : products, 'q': q}
+        if products:
+            info = {'products' : products, 'q': q}
 
-        return render(request, 'main/search.html', info)
-    else:
-        return render(request, 'main/badsearch.html', {'q': q})
+            return render(request, 'main/search.html', info)
+    # else:
+    return render(request, 'main/badsearch.html', {'q': q})
 
 def product(request, number = 0):
     product = Product.objects.filter(code = number).first()
@@ -108,25 +102,40 @@ def product(request, number = 0):
     if product:
         info = {'product': product}
 
+        #user_count
+
         return render(request, 'main/product.html', info)
 
     else:
-        return HttpResponse("<h1>Товара не существует</h1>")
+        return page_404(request)
 
 def getcode(request):
     if request.method == 'POST':
-        phone = request.POST['phone']
+        phone = int(request.POST.get('phone', 0))
         user, _ = CustomUser.objects.get_or_create(phone=phone)
 
         generated_code = create_code()
 
         #отправляем куда-то
+        print(f'code: {generated_code}')
 
         user.code = generated_code
         user.save()
 
-        return HttpResponseRedirect(reverse('test'))
-        # return HttpResponse(f"<h1>{generated_code}</h1>")
+        # # print(redirect(request.META.get('HTTP_REFERER', reverse('main'))+'#openModal5', phone=user.phone).__dict__)
+        # response = redirect(request.META.get('HTTP_REFERER', reverse('main'))+'#openModal5', phone=user.phone)
+        # response.headers['phone'] = user.phone
+
+        # print(response.__dict__)
+
+        response = HttpResponseRedirect(request.META.get('HTTP_REFERER', reverse('main'))+'#openModal5')
+        response.headers['phone'] = user.phone
+        # response.META['phone'] = user.phone
+
+        # print(response.__dict__)
+
+        return response
+    # return HttpResponseRedirect(reverse('main')+'#openModal5')
 
 def login(request):
     if request.method == 'POST':
@@ -149,45 +158,77 @@ def login(request):
     # return render(request, 'account/login.html', {'form': form})
 
 def logout(request):
-    if request.method == 'POST':
-        logout_user(request)
-        return HttpResponseRedirect(reverse('main'))
+    logout_user(request)
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER', reverse('main')))
 
-def add_to_cart(request):
-    if request.method == 'POST':
-        if request.user.is_authenticated:
-            if hasattr(request.user, 'cart'):
-                code = int(request.POST.get('code', False))
-                size = request.POST.get('size', False)
-                color_number = int(request.POST.get('color', False))
-                amount = int(request.POST.get('amount', False))
+def cart(request):
+    if request.user.is_authenticated:
+        if hasattr(request.user, 'cart'):
+            if request.method == 'GET':
+                # cart = request.user.get_cart
+                return render(request, 'main/cart.html')#, {'cart' : cart})
+            elif request.method == 'POST':
+                variation = None
+                id = request.POST.get('id', False)
+                amount = int(request.POST.get('amount', 0))
+                if id:
+                    variation = Amount.objects.filter(pk=id).first()
+                else:
+                    code = int(request.POST.get('code', False))
+                    size = request.POST.get('size', None)
+                    product = Product.objects.filter(code=code).first()
+                    if product:
+                        variation = Amount.objects.filter(product_id=product.pk, size=size).first()
+                if variation:
+                    request.user.change_cart(variation, amount)
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER', reverse('main')))
 
+def favorite(request):
+    if request.user.is_authenticated:
+        if hasattr(request.user, 'cart'):
+            if request.method == 'GET':
+                favorite = request.user.favorite.all()
+                return render(request, 'main/favorite.html', {'favorite' : favorite})
+            elif request.method == 'POST':
+                code = int(request.POST.get('code', None))
+                delete = bool(request.POST.get('delete', None))
                 product = Product.objects.filter(code=code).first()
                 if product:
-                    variation = Amount.objects.filter(product_id=product.pk, size=size, color=product.colors[color_number]).first()
-                    if variation:
-                        request.user.add_to_cart(variation, amount)
-
-                return HttpResponseRedirect(request.META.get('HTTP_REFERER', reverse('main')))
-            else:
-                return HttpResponse(f'<h1>Админам вход запрещен</h1>')
-        else:
-            #модальное окно авторизации
-            return HttpResponse(f'<h1>Надо зарегацца!</h1>')
-        # if request.user:
-        #     return HttpResponse(f'<h1>Не надо зарегацца!{request.user}</h1>')
-        # else:
-        #     return HttpResponse(f'<h1>Надо зарегацца!</h1>')
-
-# def delete_from_cart(request):
-#     if request.method == 'POST':
-#         if 
-
-def add_to_favorite(request):
-    if request.method == 'POST':
-        if request.user.is_authenticated:
-            if hasattr(request.user, 'cart'):
-                request.user
+                    if delete:
+                        request.user.change_favorite(product, delete=True)
+                    else:
+                        request.user.change_favorite(product) #дописать гет атрибутов и параметры
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER', reverse('main')))
 
 def order(request):
-    return render(request, 'main/order.html')
+    if request.user.is_authenticated:
+        if hasattr(request.user, 'cart'):
+            if request.method == 'GET':
+                if request.user.cart.all():
+                    return render(request, 'main/order.html')
+            elif request.method == 'POST':
+                name = request.POST.get('name', None)
+                email = request.POST.get('email', None)
+                phone = request.POST.get('phone', None)
+                delivery = request.POST.get('delivery', None)
+                adress = ''
+                if delivery:
+                    data_fields = ['index', 'town', 'street', 'house', 'apart', 'comment']
+                    for i in data_fields:
+                        field = request.POST.get(i, None)
+                        if field != data_fields[-1]:
+                            adress += f'{field}, '
+                        else:
+                            adress += field
+                else:
+                    adress = None
+                #проверить наличие товаров и создать заказ
+
+                for i in request.user.cart.all():
+                    # print(i)
+                    if i.amount > Amount.objects.filter(pk=i.product_id).first().amount:
+                        return HttpResponse('мало товаров')
+
+                
+                return render(request, 'main/success.html')
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER', reverse('main')))

@@ -1,0 +1,16 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+{% load static %}
+
+<div class="done">
+    <img class="done-img" src="{% static 'img/4.svg' %}"><img class="done-img" src="{% static 'img/0.svg' %}">
+    <img class="done-img" src="{% static 'img/405.svg' %}">
+    <h2 class="done-title">ТАКОЙ СТРАНИЦЫ НЕ СУЩЕСТВУЕТ</h2>
+    <p class="done-description">Попробуйте перезагрузить страницу или проверьте ссылку</p>
+    <form action="{% url 'main' %}" method="GET">
+        <button class="done-button"><span class="done-link">НА ГЛАВНУЮ</span></button>
+    </form>
+</div>
+
+{% endblock %}

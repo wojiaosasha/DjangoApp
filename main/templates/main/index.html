@@ -14,7 +14,7 @@
     <ul class='pik'>
       {% for i in title_categories|slice:':3' %}
         <li class="pik-item"><img src="{{i.image.url}}" alt="{{i.name}}" width="394" height="212" >
-          <a class="pik-{% if forloop.first %}o{% elif forloop.last %}t{% else %}f{% endif %}link" href="{% url 'category' i.slug %}">{{i.name}}</a>
+          <a class={% if forloop.first %}"pik-olink"{% elif forloop.last %}"pik-tlink"{% else %}"pik-flink"{% endif %} href="{% url 'category' i.slug %}">{{i.name}}</a>
         </li>
       {% endfor %}
     </ul>
@@ -23,7 +23,7 @@
     <ul class='tpik'>
       {% for i in title_categories|slice:'3:5' %}
         <li class="tpik-item"><img src="{{i.image.url}}" alt="{{i.name}}" width="608" height="288" >
-          <a class="tpik-{% if forloop.first %}o{% else %}t{% endif %}link" href="{% url 'category' i.slug %}">{{i.name}}</a>
+          <a class={% if forloop.first %}"tpik-olink"{% else %}"tpik-tlink"{% endif %} href="{% url 'category' i.slug %}">{{i.name}}</a>
         </li>
       {% endfor %}
     </ul>
@@ -32,7 +32,7 @@
     <ul class='fpik'>
       {% for i in title_categories|slice:'5:8' %}
         <li class="fpik-item"><img src="{{i.image.url}}" alt="{{i.name}}" width="394" height="212" >
-          <a class="fpik-{% if forloop.first %}o{% elif forloop.last %}t{% else %}f{% endif %}link" href="{% url 'category' i.slug %}">{{i.name}}</a>
+          <a class={% if forloop.first %}"fpik-olink"{% elif forloop.last %}"fpik-tlink"{% else %}"fpik-flink"{% endif %} href="{% url 'category' i.slug %}">{{i.name}}</a>
         </li>
       {% endfor %}
     </ul>
@@ -42,12 +42,24 @@
  </div>
     <novel>
   <ul class='novel'>
-    <li class="novel-item"><img src="img/back.png" alt="trench" width="288" height="407" ><span class="novel-ometa">NEW</span><br><a class="novel-link" href="">Water-repellent wool twill trench coat</a>
-    <img class="novel-back" src="img/Group 617.svg" alt="back"><p class="novel-price">17 200 ₽</p></li>
-    <li class="novel-item"><img src="img/back.png" alt="trench" width="288" height="407" ><span class="novel-tmeta">NEW</span><br><a class="novel-link" href="">Water-repellent wool twill trench coat</a><p class="novel-price">17 200 ₽</p></li>
+    {% for i in new_products %}
+      <li class="novel-item"><img src="{{i.title_image.url}}" alt="trench" width="288" height="407" >
+      <!-- <span class="novel-ometa">NEW</span> -->
+      <br>
+      <a class="novel-link" href="{% url 'product' i.code %}">{{i.name}}</a>
+      {% if forloop.first %}
+        <img class="novel-back" src="{% static 'img/Group 617.svg' %}" alt="back">
+      {% endif %}
+      {% if forloop.last %}
+        <img class="novel-next" src="{% static 'img/Group 618.svg' %}" alt="next">
+      {% endif %}
+        <p class="novel-price">{{i.price}} ₽</p></li>
+    {% endfor %}
+
+    <!-- <li class="novel-item"><img src="img/back.png" alt="trench" width="288" height="407" ><span class="novel-tmeta">NEW</span><br><a class="novel-link" href="">Water-repellent wool twill trench coat</a><p class="novel-price">17 200 ₽</p></li>
     <li class="novel-item"><img src="img/back.png" alt="trench" width="288" height="407" ><span class="novel-fmeta">NEW</span><br><a class="novel-link" href="">Water-repellent wool twill trench coat</a><p class="novel-price">17 200 ₽</p></li>
     <li class="novel-item"><img src="img/back.png" alt="trench" width="288" height="407" ><span class="novel-smeta">NEW</span><br><a class="novel-link" href="">Water-repellent wool twill trench coat</a>
-    <img class="novel-next" src="img/Group 618.svg" alt="next"> <p class="novel-price">17 200 ₽</p></li>
+    <img class="novel-next" src="img/Group 618.svg" alt="next"> <p class="novel-price">17 200 ₽</p></li> -->
   </ul>
 </novel>
 <about>

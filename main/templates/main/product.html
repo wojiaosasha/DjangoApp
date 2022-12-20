@@ -12,17 +12,15 @@
           <li class="guide-item"><a class="guide-link" href="{% url 'category' i.slug %}">{{i.name}}</a></li>
           <li class="guide-item">/</li>
         {% endfor %}
-        <li class="guide-item">{{product.name}}</li>
+        <li class="guide-item">{{product.product_info.name}}, {{product.color}}</li>
     </ul>
    </guide>
    <div class="carta">
    <div class="carta-item scrool">
     <ul>
         <li class="scrool-item"><img class="scrool-icon" src="{% static 'img/top.svg' %}" alt="top"></li>
-        {% for i in product.images.all %}
-          {% if not forloop.first %}
-            <li class="scrool-item"><img class="scrool-img" src="{{i.image.url}}" width="180" height="242" alt="one"></li>
-          {% endif %}
+        {% for i in product.product_info.images.all %}
+          <li class="scrool-item"><img class="scrool-img" src="{{i.image.url}}" width="180" height="242" alt="one"></li>
         {% endfor %}
         <li class="scrool-item"><img class="scrool-icon" src="{% static 'img/bottom.svg' %}" alt="bottom"></li>
     </ul>
@@ -30,14 +28,21 @@
    <div class="carta-item migm">
     {% with i=product.images.all|first %}
       <!-- добавить дефолтную картинку -->
-      <img src="{{i.image.url}}" alt="main" width="464" height="612">
+      <img src="{{product.title_image.url}}" alt="main" width="464" height="612">
+
+      <form action="{% url 'favorite' %}" method="POST">
+        {% csrf_token %}
+        <input name="code" type="hidden" value="{{product.code}}">
+        <input type="image" class="migm-btn" src="{% static 'img/Vector(1).svg' %}"> <br>
+      </form>
+
       {% if product.is_new %}
-        <span class="migm-span">NEW</span>
+        <span class="migm-meta">NEW</span>
       {% endif %}
     {% endwith %}
    </div>
 
-   <form action="/add_to_cart" method="POST">
+   <form action="{% url 'cart' %}" method="POST">
    {% csrf_token %}
 
     <input type="hidden" name="code" value="{{product.code}}">
@@ -47,28 +52,42 @@
     <p class="info-description"><b>Артикул:</b> {{product.code}}</p>
     <p class="info-description">{{product.description}}</p>
 
+    {% if product.sizes %}
     <p class="info-subtitle">РАЗМЕР:</p>
     
     <select class="info-select" name="size">
+      
       {% for i in product.sizes %}
-      <option value={{i}}>{{i}}</option>
+        <option value={{i}}>{{i}}</option>
       {% endfor %}
+      
     </select>
-    <p class="info-descriptions">Не можете подобрать размер?<br> <a class="info-link" href="">Запишитесь на примерку в наш шоурум</a></p>
-     
+    {% endif %}
+    
+    <p class="info-descriptions">Не можете подобрать размер?<br> <a class="info-link" href="{{whatsapp.link}}">Запишитесь на примерку в наш шоурум</a></p>
+
+<!-- onclick="redirect();" -->
 
     <p class="info-subtitle">ЦВЕТ:</p>
 
     <div class="radioone">
-    {% for i in product.colors %}
+    {% for i in product.color_vars %}
       <input 
-      {% if forloop.first %}
+      {% if i.color == product.color %}
       checked="checked"
+      {% else %}
+      onclick="redirect_func_{{forloop.counter0}}();"
       {% endif %}
-      class="radioone-input" type="radio" name="color" value="{{forloop.counter0}}">
+      class="radioone-input" type="radio" name="color"/>
         <!-- <span class="radioone-fake"></span> -->
-        <label class="radioone-label" for="ri1">{{i}}</label>
+        <label class="radioone-label" for="ri1">{{i.color}}</label>
       <br>
+      <script>
+        function redirect_func_{{forloop.counter0}}() {
+          window.location = "{% url 'product' i.code %}";
+          //window.alert('heyhey');
+            }
+      </script>
     {% endfor %}
     </div>
 
@@ -80,7 +99,7 @@
       <input  type="number" min="0" max="10" value="1" readonly class="counter-raz" name="amount">
       <button class="counter-plus" type="button" onclick="this.previousElementSibling.stepUp()">+</button>
     </div>
-      <button class="info-button" type="submit">В КОРЗИНУ</button>
+      <button class="info-button" type="submit"><span class="info-inlink">В КОРЗИНУ</span></button>
     </div>
 
    </div>

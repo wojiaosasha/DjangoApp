@@ -3,7 +3,32 @@
 {% block content %}
 {% load static %}
 
-{{page.title}}
-{{page.text_area_1|linebreaks}}
+<!-- {{page.title}}
+{{page.text_area_1|linebreaks}} -->
+
+<div class="inf_text">
+    <main>
+      <div class="main">
+      <p class="main-image"><img src="{{page.title_image.url}}" height="346" width="1200" alt="prewiev"></p>
+      <div class="main-centeredi">{{page.title}}</div>
+      </div>
+    </main> 
+    <!-- <h2 class="inf_text-title">УСЛОВИЯ ВОЗВРАТА</h3> -->
+        <div class="paragraph">{{page.text_area_1|linebreaks}}</div>
+        <!-- <div class="paragraph">Если у продавца отсутствует необходимый товар, замена товара ненадлежащего качества должна быть произведена в течение месяца со дня предъявления требований.
+     На время ремонта потребитель может потребовать безвозмездно предоставить ему аналогичный товар во временное пользование, если ремонт производится более 3 дней с момента подачи претензии.</div> -->
+      <div class="carousel" data-flickity='{"autoplay": true}'>
+        {% for i in page.images.all %}
+            <div class="carousel-cell" style="background-image: url({{i.image.url}})"></div>
+        {% endfor %}
+        <div class="carousel-cell" style="background-image: url(img/back.png)"></div>
+        <div class="carousel-cell" style="background-image: url(img/back.png)"></div>
+        <div class="carousel-cell" style="background-image: url(img/back.png)"></div>
+      </div>
+  
+      <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+      <!-- <h2 class="inf_text-title">КАК ВЫ МОЖЕТЕ ВЕРНУТЬ ТОВАР?</h3> -->
+        <div class="paragraph">{{page.text_area_2|linebreaks}}</div><br><br>   
+</div>
 
 {% endblock %}
