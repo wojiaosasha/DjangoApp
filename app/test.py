@@ -1,4 +1,5 @@
 from settings import *
+from random import randint
 
 # print(MEDIA_ROOT)
 
@@ -18,8 +19,13 @@ arr = [3, 5, 5, 8, 9, 4]
 
 # print(arr[:20])
 
-if False:
-    array = 0
+# if False:
+#     array = 0
 
-if array:
-    print(7)
+# if array:
+#     print(7)
+
+var = ['кола', 'хлопушки', 'ничего']
+number = randint(1,3)
+
+print(var[number])

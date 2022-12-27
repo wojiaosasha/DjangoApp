@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.postgres.fields import ArrayField
 from django.contrib.auth.models import User
 from .utils import slugify, SingletonModel, ContactsChoices, Cart
+from datetime import datetime 
 
 class Category(models.Model):
     slug = models.SlugField(editable=False, default='slug')
@@ -19,6 +20,17 @@ class Category(models.Model):
         if self.parent:
             self.parent.is_leaf = False
             self.parent.save()
+
+            if ProductInfo.objects.filter(category_id=self.parent.pk).first():
+                self.parent = None
+
+        node = self.parent
+        while node:
+            if node == self:
+                self.parent = None
+                break
+            node = node.parent
+             
         super().save(*args, **kwargs)
 
     @property
@@ -43,10 +55,6 @@ class Category(models.Model):
             for i in Category.objects.filter(parent_id=self.pk):
                 result |= i.products
             return result
-
-    # @property
-    # def is_leaf(self):
-    #     return not Category.objects.filter(parent_id=self.pk).first()
 
 class ProductImage(models.Model):
     image = models.ImageField(upload_to='images/products')
@@ -168,7 +176,7 @@ class CustomUser(models.Model):
                 self.favorite.remove(product)
             else:
                 self.favorite.add(product)
-            product.save()
+            # self.save()
                 
     @property
     def is_authenticated(self):
@@ -184,6 +192,36 @@ class CustomUser(models.Model):
         for i in self.cart.all():
             full_price += i.product.product.price * i.amount
         return full_price
+
+    def create_order(self, name='', email='', phone=0, delivery=''):
+        if self.cart.first():
+            self.name = name
+            self.email = email
+            self.save()
+
+            amounts = list(self.cart.values_list('amount', flat=True))
+
+            order = Order.objects.create(customer=self, name=name, email=email, delivery=delivery, phone=phone, amounts=amounts)
+            for i in self.cart.all():
+                item = Amount.objects.filter(pk=i.product_id).first()
+                item.amount -= i.amount
+                item.ordered += i.amount
+                item.save()
+
+                if item.amount == 0:
+                    Cart.objects.filter(product_id=item.pk).delete()
+                else:
+                    for k in Cart.objects.filter(product_id=item.pk):
+                        if k.amount > item.amount:
+                            k.amount = item.amount
+                            k.save()
+
+                order.products.add(item)
+            order.save()
+
+            Cart.objects.filter(user_id=self.pk).delete()
+            
+        #add product
 
 class Cart(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='cart')
@@ -238,12 +276,21 @@ class Contact(models.Model):
 
 class Order(models.Model):
     customer = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True)
-    phone = models.IntegerField()
+    phone = models.BigIntegerField()
     name = models.CharField(max_length=50)
     email = models.EmailField()
     products = models.ManyToManyField(Amount) #строка/массив строк?
     amounts = ArrayField(models.IntegerField())
-    date = models.DateTimeField()
+    date = models.DateTimeField(default=datetime.now, blank=True)
     delivery = models.TextField(null=True)
     #date
     #способ доставки
+
+    def __str__(self):
+        return f"{self.name}, {self.date}"
+
+class Feedback(models.Model):
+    name = models.CharField(max_length=70)
+    phone = models.CharField(max_length=10)
+    email = models.EmailField()
+    massage = models.TextField()

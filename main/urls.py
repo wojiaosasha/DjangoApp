@@ -14,4 +14,6 @@ urlpatterns = [
     path('cart', views.cart, name='cart'),
     path('order', views.order, name='order'),
     path('favorite', views.favorite, name='favorite'),
+    # path('<slug:slug>', views.notfound, name='notfound'), #переопределить стандарт 404
+    path('api/catalog', views.api_catalog, name='api_catalog')
 ]

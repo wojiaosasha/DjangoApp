@@ -40,6 +40,19 @@
                       <input  type="number" min="0" max="100" value="{{i.amount}}" readonly class="counter_2-raz">
                       <button class="counter_2-plus" type="button" onclick="this.previousElementSibling.stepUp()">+</button>
                     </div>
+                <!-- <script>
+                    function count_up(id, amount) {
+                        var token = document.getElementsByName('csrfmiddlewaretoken')[0].value
+                        console.log(token)
+                        fetch("{% url 'cart' %}", {
+                            method: 'POST',
+                            headers: {'Cookie' : 'csrftoken='+token }, //; sessionid=0065ph5rbgkcip35wbfaj4gjowm988uj'
+                            body: {'id': id, 'amount' : amount+1},
+                        })//.then((response) => response.json())
+                          .then((data) => console.log(data));
+                    } //this.previousElementSibling.stepUp()
+                </script> -->
+                
               </div>
                  <div class="mini_goods-item mprice">
                   <p class="mprice-description">Стоимость</p>

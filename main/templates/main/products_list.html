@@ -47,7 +47,7 @@
           <input name="code" type="hidden" value="{{i.code}}">
           <input type="image"
             {% if forloop.first %}
-              {% cycle 'class="t_novel-btn"' 'class="t_novel-btn2"' 'class="t_novel-btn3"' as opentags %}
+              {% cycle 'class="t_novel-btn3"' 'class="t_novel-btn2"' 'class="t_novel-btn"' as opentags %}
             {% else %}
               {% cycle opentags %}
             {% endif %}

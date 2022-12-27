@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <header>
         <div class="block block-dark">
         <nav>
@@ -44,285 +45,13 @@
         <a class="poisk-link" href="{% url 'catalog' %}">КАТАЛОГ</a></button>
         
         <input class="poisk-input" type="search" id="testInput" onsearch = "testFunction()" name="q">
+
+
        <div class="drop_menu">
-      
-
-      {% for i in categories %}
-        
-      {% endfor %}
-      
-
-        <li class="submenu"><a href="#">ОДЕЖДА</a>
-          <ul class="topmenu">
-            <li class="submenu"><a href="#">Юбки</a>
-              <ul class="topmenu">
-                <li class="submenu"><a href="#">Уровень 1</a></li>
-                <li class="submenu"><a href="#">Уровень 2</a></li>
-                <li class="submenu"><a href="#">Уровень 3</a></li>
-              </ul>
-            </li>
-            <li class="submenu"><a href="#">Джемеперы</a>
-              <ul class="topmenu">
-                <li class="submenu"><a href="#">Уровень 1</a></li>
-                <li class="submenu"><a href="#">Уровень 2</a></li>
-                <li class="submenu"><a href="#">Уровень 3</a></li>
-              </ul>
-            </li>
-            <li class="submenu"><a href="#">Джинсы</a>
-              <ul class="topmenu">
-                <li class="submenu"><a href="#">Уровень 1</a></li>
-                <li class="submenu"><a href="#">Уровень 2</a></li>
-                <li class="submenu"><a href="#">Уровень 3</a></li>
-              </ul>
-            </li>
-            <li class="submenu"><a href="#">Брюки, шорты</a>
-              <ul class="topmenu">
-                <li class="submenu"><a href="#">Уровень 1</a></li>
-                <li class="submenu"><a href="#">Уровень 2</a></li>
-                <li class="submenu"><a href="#">Уровень 3</a></li>
-              </ul>
-            </li>
-            <li class="submenu"><a href="#">Футболки, топы, лонгсливы</a>
-              <ul class="topmenu">
-                <li class="submenu"><a href="#">Уровень 1</a></li>
-                <li class="submenu"><a href="#">Уровень 2</a></li>
-                <li class="submenu"><a href="#">Уровень 3</a></li>
-              </ul>
-            </li>
-            <li class="submenu"><a href="#">Блузки, рубашки, туники</a>
-              <ul class="topmenu">
-                <li class="submenu"><a href="#">Уровень 1</a></li>
-                <li class="submenu"><a href="#">Уровень 2</a></li>
-                <li class="submenu"><a href="#">Уровень 3</a></li>
-              </ul>
-            </li>
-            <li class="submenu"><a href="#">Платья</a>
-              <ul class="topmenu">
-                <li class="submenu"><a href="#">Уровень 1</a></li>
-                <li class="submenu"><a href="#">Уровень 2</a></li>
-                <li class="submenu"><a href="#">Уровень 3</a></li>
-              </ul>
-            </li>
-            <li class="submenu"><a href="#">Толстовки</a>
-              <ul class="topmenu">
-                <li class="submenu"><a href="#">Уровень 1</a></li>
-                <li class="submenu"><a href="#">Уровень 2</a></li>
-                <li class="submenu"><a href="#">Уровень 3</a></li>
-              </ul>
-            </li>
-            <li class="submenu"><a href="#">Костюмы</a>
-              <ul class="topmenu">
-                <li class="submenu"><a href="#">Уровень 1</a></li>
-                <li class="submenu"><a href="#">Уровень 2</a></li>
-                <li class="submenu"><a href="#">Уровень 3</a></li>
-              </ul>
-            </li>
-            <li class="submenu"><a href="#">Оверол</a>
-              <ul class="topmenu">
-                <li class="submenu"><a href="#">Уровень 1</a></li>
-                <li class="submenu"><a href="#">Уровень 2</a></li>
-                <li class="submenu"><a href="#">Уровень 3</a></li>
-              </ul>
-            </li>
-          </ul>
-        </li>
-
-        <li class="submenu"><a href="#">ВЕРХНЯЯ ОДЕЖДА</a>
-      <ul class="topmenu">
-        <li class="submenu"><a href="#">Куртки</a>
-          <ul class="topmenu">
-            <li class="submenu"><a href="#">Уровень 1</a></li>
-            <li class="submenu"><a href="#">Уровень 2</a></li>
-            <li class="submenu"><a href="#">Уровень 3</a></li>
-          </ul>
-        </li>
-        <li class="submenu"><a href="#">Джинсовые куртки</a>
-          <ul class="topmenu">
-            <li class="submenu"><a href="#">Уровень 1</a></li>
-            <li class="submenu"><a href="#">Уровень 2</a></li>
-            <li class="submenu"><a href="#">Уровень 3</a></li>
-          </ul>
-        </li>
-        <li class="submenu"><a href="#">Пальто</a>
-          <ul class="topmenu">
-            <li class="submenu"><a href="#">Уровень 1</a></li>
-            <li class="submenu"><a href="#">Уровень 2</a></li>
-            <li class="submenu"><a href="#">Уровень 3</a></li>
-          </ul>
-        </li>
-        <li class="submenu"><a href="#">Пуховики</a>
-          <ul class="topmenu">
-            <li class="submenu"><a href="#">Уровень 1</a></li>
-            <li class="submenu"><a href="#">Уровень 2</a></li>
-            <li class="submenu"><a href="#">Уровень 3</a></li>
-          </ul>
-        </li>
-        <li class="submenu"><a href="#">Плащи</a>
-          <ul class="topmenu">
-            <li class="submenu"><a href="#">Уровень 1</a></li>
-            <li class="submenu"><a href="#">Уровень 2</a></li>
-            <li class="submenu"><a href="#">Уровень 3</a></li>
-          </ul>
-        </li>
-        <li class="submenu"><a href="#">Ветровки</a>
-          <ul class="topmenu">
-            <li class="submenu"><a href="#">Уровень 1</a></li>
-            <li class="submenu"><a href="#">Уровень 2</a></li>
-            <li class="submenu"><a href="#">Уровень 3</a></li>
-          </ul>
-        </li>
-        <li class="submenu"><a href="#">Кэмэлюкс</a>
-          <ul class="topmenu">
-            <li class="submenu"><a href="#">Уровень 1</a></li>
-            <li class="submenu"><a href="#">Уровень 2</a></li>
-            <li class="submenu"><a href="#">Уровень 3</a></li>
-          </ul>
-        </li>
-          </ul>
-        </li>
+          <ul class="topmenu" id="catalog"></ul>
+       </div>
 
 
-        <li class="submenu"><a href="#">АКСЕССУАРЫ</a>
-          <ul class="topmenu">
-            <li class="submenu"><a href="#">Солнечные очки</a>
-              <ul class="topmenu">
-                <li class="submenu"><a href="#">Уровень 1</a></li>
-                <li class="submenu"><a href="#">Уровень 2</a></li>
-                <li class="submenu"><a href="#">Уровень 3</a></li>
-              </ul>
-            </li>
-            <li class="submenu"><a href="#">Ремни</a>
-              <ul class="topmenu">
-                <li class="submenu"><a href="#">Уровень 1</a></li>
-                <li class="submenu"><a href="#">Уровень 2</a></li>
-                <li class="submenu"><a href="#">Уровень 3</a></li>
-              </ul>
-            </li>
-            <li class="submenu"><a href="#">Перчатки</a>
-              <ul class="topmenu">
-                <li class="submenu"><a href="#">Уровень 1</a></li>
-                <li class="submenu"><a href="#">Уровень 2</a></li>
-                <li class="submenu"><a href="#">Уровень 3</a></li>
-              </ul>
-            </li>
-            <li class="submenu"><a href="#">Бижутерия</a>
-              <ul class="topmenu">
-                <li class="submenu"><a href="#">Уровень 1</a></li>
-                <li class="submenu"><a href="#">Уровень 2</a></li>
-                <li class="submenu"><a href="#">Уровень 3</a></li>
-              </ul>
-            </li>
-            <li class="submenu"><a href="#">Аксессуары для кубов</a>
-              <ul class="topmenu">
-                <li class="submenu"><a href="#">Уровень 1</a></li>
-                <li class="submenu"><a href="#">Уровень 2</a></li>
-                <li class="submenu"><a href="#">Уровень 3</a></li>
-              </ul>
-            </li>
-          </ul>
-        </li>
-        <li class="submenu"><a href="#">ЖАКЕТЫ И ПИДЖАКИ</a>
-          <ul class="topmenu">
-            <li class="submenu"><a href="#">Уровень 1</a>
-              <ul class="topmenu">
-                <li class="submenu"><a href="#">Уровень 1/1</a></li>
-                <li class="submenu"><a href="#">Уровень 1/2</a></li>
-                <li class="submenu"><a href="#">Уровень 1/3</a></li>
-              </ul></li>
-            <li class="submenu"><a href="#">Уровень 2</a>
-              <ul class="topmenu">
-                <li class="submenu"><a href="#">Уровень 2/1</a></li>
-                <li class="submenu"><a href="#">Уровень 2/2</a></li>
-                <li class="submenu"><a href="#">Уровень 2/3</a></li>
-              </ul>
-            </li>
-            <li class="submenu"><a href="#">Уровень 3</a>
-              <ul class="topmenu">
-                <li class="submenu"><a href="#">Уровень 3/1</a></li>
-                <li class="submenu"><a href="#">Уровень 3/2</a></li>
-                <li class="submenu"><a href="#">Уровень 3/3</a></li>
-              </ul>
-            </li>
-          </ul>
-        </li>
-        <li class="submenu"><a href="#">ОБУВЬ</a>
-          <ul class="topmenu">
-            <li class="submenu"><a href="#">Уровень 1</a>
-              <ul class="topmenu">
-                <li class="submenu"><a href="#">Уровень 1/1</a></li>
-                <li class="submenu"><a href="#">Уровень 1/2</a></li>
-                <li class="submenu"><a href="#">Уровень 1/3</a></li>
-              </ul></li>
-            <li class="submenu"><a href="#">Уровень 2</a>
-              <ul class="topmenu">
-                <li class="submenu"><a href="#">Уровень 2/1</a></li>
-                <li class="submenu"><a href="#">Уровень 2/2</a></li>
-                <li class="submenu"><a href="#">Уровень 2/3</a></li>
-              </ul>
-            </li>
-            <li class="submenu"><a href="#">Уровень 3</a>
-              <ul class="topmenu">
-                <li class="submenu"><a href="#">Уровень 3/1</a></li>
-                <li class="submenu"><a href="#">Уровень 3/2</a></li>
-                <li class="submenu"><a href="#">Уровень 3/3</a></li>
-              </ul>
-            </li>
-          </ul>
-        </li>
-        <li class="submenu"><a href="#">СУМКИ И КОШЕЛЬКИ</a>
-          <ul class="topmenu">
-            <li class="submenu"><a href="#">Уровень 1</a>
-              <ul class="topmenu">
-                <li class="submenu"><a href="#">Уровень 1/1</a></li>
-                <li class="submenu"><a href="#">Уровень 1/2</a></li>
-                <li class="submenu"><a href="#">Уровень 1/3</a></li>
-              </ul></li>
-            <li class="submenu"><a href="#">Уровень 2</a>
-              <ul class="topmenu">
-                <li class="submenu"><a href="#">Уровень 2/1</a></li>
-                <li class="submenu"><a href="#">Уровень 2/2</a></li>
-                <li class="submenu"><a href="#">Уровень 2/3</a></li>
-              </ul>
-            </li>
-            <li class="submenu"><a href="#">Уровень 3</a>
-              <ul class="topmenu">
-                <li class="submenu"><a href="#">Уровень 3/1</a></li>
-                <li class="submenu"><a href="#">Уровень 3/2</a></li>
-                <li class="submenu"><a href="#">Уровень 3/3</a></li>
-              </ul>
-            </li>
-          </ul>
-        </li>
-        <li class="submenu"><a href="#">ШАПКИ, ШЛЯПЫ, ШАРФЫ</a>
-          <ul class="topmenu">
-            <li class="submenu"><a href="#">Уровень 1</a>
-              <ul class="topmenu">
-                <li class="submenu"><a href="#">Уровень 1/1</a></li>
-                <li class="submenu"><a href="#">Уровень 1/2</a></li>
-                <li class="submenu"><a href="#">Уровень 1/3</a></li>
-              </ul></li>
-            <li class="submenu"><a href="#">Уровень 2</a>
-              <ul class="topmenu">
-                <li class="submenu"><a href="#">Уровень 2/1</a></li>
-                <li class="submenu"><a href="#">Уровень 2/2</a></li>
-                <li class="submenu"><a href="#">Уровень 2/3</a></li>
-              </ul>
-            </li>
-            <li class="submenu"><a href="#">Уровень 3</a>
-              <ul class="topmenu">
-                <li class="submenu"><a href="#">Уровень 3/1</a></li>
-                <li class="submenu"><a href="#">Уровень 3/2</a></li>
-                <li class="submenu"><a href="#">Уровень 3/3</a></li>
-              </ul>
-            </li>
-          </ul>
-        </li>
-
-
-      </ul>
-
-
-      </div>
       </div>
       </form>
       
@@ -360,6 +89,7 @@
     <div class="wrapper">
       <div class="content">
         {% block content %}{% endblock %}
+
       </div>
     <div class="footer">
         <div class="tblock tblock-dark">
@@ -374,14 +104,14 @@
           <ends>
             <ul class='ends'>
               <li class="ends-item">КАТАЛОГ</li><br>
-              <li class="ends-item"><a class="ends-link" href="">Одежда</a></li>
-              <li class="ends-item"><a class="ends-link" href="">Обувь</a></li>
-              <li class="ends-item"><a class="ends-link" href="">Верхняя одежда</a></li>
-              <li class="ends-item"><a class="ends-link" href="">Домашняя одежда</a></li><br><br>
-              <li class="ends-item"><a class="ends-link" href="">Купальники</a></li>
-              <li class="ends-item"><a class="ends-link" href="">Аксессуары</a></li>
-              <li class="ends-item"><a class="ends-link" href="">Идеи для подарков</a></li>
-              <li class="ends-item"><a class="ends-link" href="">Marina Rinaldi</a></li>
+              {% for i in categories|slice:':4' %}
+                <li class="ends-item"><a class="ends-link" href="{% url 'category' i.slug %}">{{i.name}}</a></li>
+              {% endfor %}
+              <br><br>
+              {% for i in categories|slice:'4:8' %}
+                <li class="ends-item"><a class="ends-link" href="{% url 'category' i.slug %}">{{i.name}}</a></li>
+              {% endfor %}
+              
           </ul>
           </ends>
           <end>
@@ -451,7 +181,12 @@
               <p class="modal-subtitle">Мы отправим СМС с кодом потверждения</p>
               <form action="{% url 'getcode' %}" method="POST">
                 {% csrf_token %}
-                <input class="modal-intext" type="tel" name="phone" maxlength="10">
+                <!-- <ul class="modal-intext">
+                  <li>+7</li>
+                  <li><input class="modal-intext" type="tel" name="phone" maxlength="10"></li>
+                </ul> -->
+                <span>+7</span>
+                <input class="modal-intext" type="tel" name="phone" maxlength="10" required>
                 <button type="submit" class="modal-button"><span class="modal-link">ПОЛУЧИТЬ КОД</span></button>
               </form>
                 <!-- <a class="modal-link" href="#openModal5"></a></button> -->
@@ -472,11 +207,9 @@
               <a href="#close" title="Close" class="closes">×</a>
             </div>
             <div class="modal-body">    
-              <p class="modal-subtitle msb_center">Мы отправили код на номер</p>
+              <p class="modal-subtitle msb_center">Мы отправили код на номер +7{{user_phone}}</p>
               <form action="{% url 'login' %}" method="POST">
               {% csrf_token %}
-                <input class="modal-intext" type="tel" name="phone" maxlength="10">
-                <!-- <input type="hidden" value="1111111111"> -->
                 <input class="modal-password" type="password" name="code", maxlength="4">
                 <button type="submit" class="modal-button">
                   <span class="modal-link">ОТПРАВИТЬ КОД</span>
@@ -490,6 +223,49 @@
           </div>
           </div>
         </div>
+
+        
+
+        <script>
+          // data = "{% url 'api_catalog' %}"
+          
+          jQuery.getJSON("{% url 'api_catalog' %}", function(data) {
+
+            function recursive(item) {
+              // console.log(item)
+              var tree = `<li class="submenu"><a href="${cat_url+data[item]["slug"]}">${data[item]["name"]}</a>`
+                if (data[item]["children"].length > 0) {
+                  // console.log(data[item]["children"]+' has children')
+                  tree += `<ul class="topmenu">`
+                  $.each(data[item]["children"], function(child) {
+                    tree += recursive(data[item]["children"][child]);
+                  });
+                  tree += `</ul>`
+                }
+              tree += `</li>`
+              return tree
+            }
+            
+            cat_url = "/category/"
+            // console.log(cat_url)
+            // console.log(data);
+            var result = ''
+            $.each(data, function(i) {
+              if (!data[i]["parent"]) {
+                result += recursive(i)
+              }
+            });
+
+            catalog = document.getElementById('catalog')
+            catalog.innerHTML += result
+            
+          });
+          // data = fetch("{% url 'api_catalog' %}");
+          // console.log(data);
+          // var data = JSON.parse('{{catalog}}'')
+          // console.log(data)
+          // window.alert('{{catalog}}')
+        </script>
 
     </body>
 </html>
